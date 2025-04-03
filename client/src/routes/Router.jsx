@@ -4,7 +4,6 @@ import LoginPage from "../pages/shared/LoginPage";
 import UserLayout from "../layout/UserLayout";
 import LandingPage from "../pages/shared/LandingPage";
 import HomePage from "../pages/shared/HomePage";
-import ProfilePage from "../pages/ProfilePage";
 
 
 export const router = createBrowserRouter([
