@@ -1,5 +1,5 @@
 import React from 'react'
-import ThemeToggle from './ThemeToggle'
+import ThemeToggle from '../pages/shared/ThemeToggle'
 import { userLogout } from '../services/userServices'
 import { persistor } from '../redux/store'
 import { useDispatch } from "react-redux";
