@@ -1,7 +1,27 @@
 import React from 'react'
 import ThemeToggle from './ThemeToggle'
+import { userLogout } from '../services/userServices'
+import { persistor } from '../redux/store'
+import { useDispatch } from "react-redux";
+import { useNavigate } from "react-router-dom";
+import { clearUser } from '../redux/features/userSlice';
+import { toast } from "react-toastify";
 
 function Header() {
+  const navigate = useNavigate()
+  const dispatch = useDispatch()
+  const handleLogout = () => {
+    try {
+      userLogout().then(() => {
+            persistor.purge()
+            dispatch(clearUser())
+            toast.success("User Logout successful!!!"); 
+            navigate("/login");
+      })
+    } catch (error) {
+        console.log(error)
+    }
+  }
   return (
     <div>
         <div className="navbar bg-gray-900 w-full text-white shadow-sm">
@@ -30,7 +50,7 @@ function Header() {
             Profile
           </a>
         </li>
-        <li><a>Logout</a></li>
+        <li><a onClick={handleLogout}>Logout</a></li>
       </ul>
     </div>
   </div>
