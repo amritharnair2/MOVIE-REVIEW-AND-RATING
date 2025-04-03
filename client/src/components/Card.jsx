@@ -11,6 +11,7 @@ function Card({movie}) {
       src={movie.image}
       alt="Movie" className="w-full h-60 object-cover rounded-lg m-4 mx-auto"/>
   </figure>
+ 
   <div>
     <h1 className="card-title text-xl">{movie.name}</h1>
     <div className="flex justify-between pt-2">

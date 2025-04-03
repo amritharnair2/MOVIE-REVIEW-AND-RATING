@@ -2,37 +2,37 @@ const adminDb = require("../models/adminModel");
 const createToken = require("../utilities/generateToken");
 const { hashPassword, comparePassword } = require("../utilities/passwordUtilities");
 
-const register = async (req,res) => {
-    try {
-        const {email, password} = req.body;
+// const register = async (req,res) => {
+//     try {
+//         const {email, password} = req.body;
         
-        if(!email || !password ) {
-            return res.status(400).json({error: "All fields are required"})
-        }
+//         if(!email || !password ) {
+//             return res.status(400).json({error: "All fields are required"})
+//         }
 
-        const adminExist = await adminDb.findOne({email}) 
-        if(adminExist) {
-            return res.status(400).json({error: "Email already exist"})
-        }
+//         const adminExist = await adminDb.findOne({email}) 
+//         if(adminExist) {
+//             return res.status(400).json({error: "Email already exist"})
+//         }
 
-        const hashedPassword = await hashPassword(password)
+//         const hashedPassword = await hashPassword(password)
 
-        const newAdmin = new adminDb ({
-            email, password: hashedPassword
-        })
+//         const newAdmin = new adminDb ({
+//             email, password: hashedPassword
+//         })
 
-        const savedAdmin = await newAdmin.save()
-        if(savedAdmin) {
-            const token = createToken(savedAdmin._id)
-            res.cookie("token", token)
-            return res.status(200).json({message: "Admin created successfully", savedAdmin})
-        }
+//         const savedAdmin = await newAdmin.save()
+//         if(savedAdmin) {
+//             const token = createToken(savedAdmin._id)
+//             res.cookie("token", token)
+//             return res.status(200).json({message: "Admin created successfully", savedAdmin})
+//         }
 
-    } catch (error) {
-        console.log(error)
-        res.status(error.status || 500).json({error: error.message || "Internal server error"})
-    }
-}
+//     } catch (error) {
+//         console.log(error)
+//         res.status(error.status || 500).json({error: error.message || "Internal server error"})
+//     }
+// }
 
 
 
@@ -75,4 +75,4 @@ const logout = async (req,res) => {
 }
 
 
-module.exports = {register,login, logout}
+module.exports = {login, logout}
