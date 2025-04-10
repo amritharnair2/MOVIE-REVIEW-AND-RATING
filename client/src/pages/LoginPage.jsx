@@ -2,8 +2,8 @@ import React, { useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import { useDispatch } from 'react-redux'
 import { toast } from 'react-toastify'
-import { userLogin } from '../../services/userServices'
-import { saveUser } from '../../redux/features/userSlice'
+import { userLogin } from '../services/userServices'
+import { saveUser } from '../redux/features/userSlice'
 
 function LoginPage() {
   const [values, setValues] = useState ({
@@ -18,6 +18,7 @@ function LoginPage() {
   const onSubmit =() => {
       userLogin(values).then((res) => {
         console.log(res)
+        localStorage.setItem("token", res.data.token)
         toast.success("Login successful!!!"); 
         dispatch(saveUser(res.data.userExist))
         navigate("/home")
@@ -29,6 +30,7 @@ function LoginPage() {
       })
       console.log(values, "values")
     }
+
 
   return (
     <div>

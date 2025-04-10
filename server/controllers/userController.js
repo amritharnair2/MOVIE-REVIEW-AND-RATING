@@ -11,6 +11,16 @@ const register = async (req,res) => {
             return res.status(400).json({error: "All fields are required"})
         }
 
+        const emailRegex = /^\S+@\S+\.\S+$/;
+        if (!emailRegex.test(email)) {
+            return res.status(400).json({ error: "Invalid email format"});
+        }
+
+        const passwordRegex = /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&^_-])[A-Za-z\d@$!%*#?&^_-]{6,}$/;
+        if (!passwordRegex.test(password)) {
+            return res.status(400).json({ error: "Password must be at least 6 characters, include letters, numbers and a special character"});
+          }
+
         if(password !== confirmpassword)
         {
             return res.status(400).json({error: "Passwords doesnot match"})
@@ -32,7 +42,7 @@ const register = async (req,res) => {
             const token = createToken(savedUser._id)
             res.cookie("token", token)
 
-            return res.status(200).json({message: "User created successfully", savedUser})
+            return res.status(200).json({message: "User created successfully", savedUser, token})
         }
 
     } catch (error) {
@@ -57,11 +67,11 @@ const login = async (req, res) => {
 
         const passwordMatch = await comparePassword(password, userExist.password)
         if(!passwordMatch) {
-            return res.status(400).json({error: "Password doesnot match"})
+            return res.status(400).json({error: "Incorrect Password"})
         }
         const token = createToken(userExist._id)
         res.cookie("token", token)
-        return res.status(200).json({message: "User login successfull", userExist})
+        return res.status(200).json({message: "User login successfull", userExist, token})
 
     } catch (error) {
         console.log(error)

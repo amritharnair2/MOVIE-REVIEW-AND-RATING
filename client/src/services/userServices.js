@@ -17,3 +17,8 @@ export const userLogin = (data) => {
 export const userLogout = (data) => {
     return axiosInstance.post("/user/logout",data )
 }
+
+export const singleMovieDetails = (movieId) => {
+    return axiosInstance.get(`/movie/moviedetails/${movieId}`);
+};
+  

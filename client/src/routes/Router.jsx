@@ -1,9 +1,12 @@
 import { createBrowserRouter } from "react-router-dom";
-import SignupPage from "../pages/user/SignupPage";
-import LoginPage from "../pages/shared/LoginPage";
+import SignupPage from "../pages/SignupPage";
+import LoginPage from "../pages/LoginPage";
 import UserLayout from "../layout/UserLayout";
-import LandingPage from "../pages/shared/LandingPage";
-import HomePage from "../pages/shared/HomePage";
+import LandingPage from "../pages/LandingPage";
+import HomePage from "../pages/HomePage";
+import ProtectedRoute from "../components/ProtectedRoute";
+import SingleMoviePage from "../pages/SingleMoviePage";
+import ProfilePage from "../pages/ProfilePage";
 
 
 export const router = createBrowserRouter([
@@ -21,13 +24,26 @@ export const router = createBrowserRouter([
     },
     {
       path: "/home",
-      element: <UserLayout />,
+      element: (
+        <ProtectedRoute>
+          <UserLayout />
+        </ProtectedRoute>
+      ),
       errorElement: <h1>Error Page</h1>,
       children: [
         {
           index: true,
           element: <HomePage />,
         },
+        {
+          path: "movie/:movieId",   
+          element: <SingleMoviePage />,
+        },
+        {
+          path: "profile",   
+          element: <ProfilePage />,
+        }
+
   
       ]
 

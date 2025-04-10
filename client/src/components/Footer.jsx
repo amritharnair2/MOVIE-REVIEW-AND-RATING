@@ -1,14 +1,33 @@
 import React from 'react'
+import { useNavigate } from 'react-router-dom'
 
 function Footer() {
+  const navigate = useNavigate()
+
   return (
     <div>
-       <footer className="bg-gray-900 text-white w-full text-center p-4 mt-auto">
-        <p>&copy; 2025 FlickRate. All rights reserved.</p>
-        <div className="flex justify-center space-x-4 mt-2">
-          <a href="#" className="text-gray-400 hover:text-white">Privacy Policy</a>
-          <a href="#" className="text-gray-400 hover:text-white">Terms of Service</a>
-          <a href="#" className="text-gray-400 hover:text-white">Contact</a>
+      <footer className="bg-base-100 text-base-content w-full p-4 mt-auto">
+        <div className="flex items-center justify-between flex-wrap w-full">
+          
+          {/* Logo on the left */}
+          <div className="ms-0">
+            <a className="btn btn-ghost text-xl" onClick={() => navigate("/home")}>
+              <h1 className="text-3xl font-bold">
+                Flick<span className="text-red-600">Rate</span>
+              </h1>
+            </a>
+          </div>
+
+          {/* Centered content */}
+          <div className="flex flex-col items-center mx-auto text-center">
+            <p className="text-sm">&copy; 2025 FlickRate. All rights reserved.</p>
+            <div className="flex justify-center gap-4 mt-1 text-sm">
+              <a href="#" className="text-gray-400 hover:text-white">Privacy Policy</a>
+              <a href="#" className="text-gray-400 hover:text-white">Terms of Service</a>
+              <a href="#" className="text-gray-400 hover:text-white">Contact</a>
+            </div>
+          </div>
+
         </div>
       </footer>
     </div>
@@ -16,3 +35,6 @@ function Footer() {
 }
 
 export default Footer
+
+
+

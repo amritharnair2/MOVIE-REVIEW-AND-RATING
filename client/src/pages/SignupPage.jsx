@@ -1,9 +1,9 @@
 import React, { useState } from 'react'
 import { useDispatch } from 'react-redux'
 import { Link, useNavigate } from 'react-router-dom'
-import { userSignup } from '../../services/userServices'
+import { userSignup } from '../services/userServices'
 import { toast } from 'react-toastify'
-import { saveUser } from '../../redux/features/userSlice'
+import { saveUser } from '../redux/features/userSlice'
 
 
 function SignupPage() {
@@ -21,6 +21,7 @@ function SignupPage() {
   const onSubmit =() => {
     userSignup(values).then((res) => {
       console.log(res)
+      localStorage.setItem("token", res.data.token)
       toast.success("Signup successful!!!"); 
       dispatch(saveUser(res.data.savedUser))
       navigate("/home")

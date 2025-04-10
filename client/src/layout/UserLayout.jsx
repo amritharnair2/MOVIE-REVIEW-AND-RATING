@@ -9,7 +9,7 @@ function UserLayout() {
       
       <Header />
       
-      <main className='flex-grow px-6 md:px-12 lg:px-20 p-4 hero bg-base-200 flex items-center justify-cente'>
+      <main className='flex-grow px-8 py-4 bg-base-200'>
         <Outlet /> 
       </main>
       
