@@ -30,7 +30,7 @@ function Header() {
     <div>
         <div className="navbar bg-base-100 text-base-content w-full shadow-sm">
   <div className="flex-1">
-    <a className="btn btn-ghost text-xl" onClick={() => navigate("/home")}>
+    <a className="btn btn-ghost text-xl" onClick={() => navigate("/")}>
     <h1 className="text-3xl font-bold">
            Flick<span className="text-red-600">Rate</span>
          </h1>
@@ -52,7 +52,7 @@ function Header() {
         tabIndex="0"
         className="menu menu-sm bg-base-100 text-base-content dropdown-content rounded-box z-1 mt-3 w-52 p-2 shadow">
         <li>
-          <a className="justify-between" onClick={() => navigate("/home/profile")}>
+          <a className="justify-between" onClick={() => navigate("/profile")}>
             Profile
           </a>
         </li>

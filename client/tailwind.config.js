@@ -3,7 +3,7 @@ import daisyui from "daisyui";
 
 /** @type {import('tailwindcss').Config} */
 export default {
-  darkMode: "class", // important for theme toggling
+  darkMode: "class", 
   content: [
     "./index.html",
     "./src/**/*.{js,ts,jsx,tsx}",

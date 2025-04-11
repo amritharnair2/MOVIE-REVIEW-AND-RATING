@@ -56,7 +56,7 @@ const login = async (req, res) => {
 
         const token = createToken(admin._id, "admin")
         res.cookie("Admin_token", token)
-        return res.status(200).json({message: "Admin login successfull", admin})
+        return res.status(200).json({message: "Admin login successfull", admin, token})
 
     } catch (error) {
         console.log(error)

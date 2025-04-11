@@ -11,7 +11,7 @@ function Footer() {
           
           {/* Logo on the left */}
           <div className="ms-0">
-            <a className="btn btn-ghost text-xl" onClick={() => navigate("/home")}>
+            <a className="btn btn-ghost text-xl" onClick={() => navigate("/")}>
               <h1 className="text-3xl font-bold">
                 Flick<span className="text-red-600">Rate</span>
               </h1>

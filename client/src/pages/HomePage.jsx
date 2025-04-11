@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { listMovies } from '../services/userServices';
+import { listMovies } from '../services/MovieServices';
 import { useNavigate } from 'react-router-dom';
 import StarRating from '../components/StarRating';
 
@@ -56,14 +56,17 @@ function HomePage() {
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {movies.map((movie) => (
               <div
-                key={movie?._id}
-              >
+              key={movie?._id}
+              className="border border-gray-300 p-3 shadow-md dark:border-gray-700"
+            >
                 <img
                   src={movie?.image}
                   alt="Movie"
                   className="w-full h-60 pb-3"
                 />
-                <h1 className="text-xl font-semibold">{movie?.name}</h1>
+                <h1 className="text-xl font-semibold">{movie?.name}  
+                  <span> ({new Date(movie?.releaseDate).getFullYear()})</span>
+                </h1>
                 <hr className="my-2 border-black dark:border-white" />
                 <div className="flex justify-between text-sm my-3">
                   <span>Language</span>
@@ -79,10 +82,10 @@ function HomePage() {
                     <StarRating rating={movie?.rating} />
                   </span>
                 </div>
-                <div className="flex justify-end my-3">
+                <div className="flex justify-end mt-3">
                   <button
                     className="btn btn-sm btn-primary"
-                    onClick={() => navigate(`/home/movie/${movie._id}`)}
+                    onClick={() => navigate(`/movie/${movie._id}`)}
                   >
                     View Details
                   </button>

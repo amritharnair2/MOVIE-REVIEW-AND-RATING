@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import { singleMovieDetails } from "../services/userServices";
+import { singleMovieDetails } from "../services/MovieServices";
 
 
 const SingleMoviePage = () => {
@@ -34,7 +34,7 @@ const SingleMoviePage = () => {
       <img
         src={movie.image}
         alt={movie.name}
-        className="w-full md:w-1/3 h-auto rounded-lg object-cover"
+        className="w-full md:w-1/3 h-auto object-cover"
       />
 
 

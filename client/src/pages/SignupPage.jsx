@@ -5,10 +5,8 @@ import { userSignup } from '../services/userServices'
 import { toast } from 'react-toastify'
 import { saveUser } from '../redux/features/userSlice'
 
-
 function SignupPage() {
-
-  const [values, setValues] = useState ({
+  const [values, setValues] = useState({
     name: '',
     email: '',
     password: '',
@@ -18,84 +16,117 @@ function SignupPage() {
   const navigate = useNavigate()
   const dispatch = useDispatch()
 
-  const onSubmit =() => {
-    userSignup(values).then((res) => {
-      console.log(res)
-      localStorage.setItem("token", res.data.token)
-      toast.success("Signup successful!!!"); 
-      dispatch(saveUser(res.data.savedUser))
-      navigate("/home")
-    }).catch((err) => {
-      console.log(err)
-      toast.error(err.response.data.error, {
-        position: 'top-center'
+  const onSubmit = () => {
+    userSignup(values)
+      .then((res) => {
+        localStorage.setItem("token", res.data.token)
+        toast.success("Signup successful!!!")
+        dispatch(saveUser(res.data.savedUser))
+        navigate("/")
       })
-    })
-    console.log(values, "values")
+      .catch((err) => {
+        toast.error(err.response.data.error, {
+          position: 'top-center'
+        })
+      })
   }
 
   return (
-    <div className="flex justify-center items-center min-h-screen bg-black text-white">
-      <div className="card w-[400px] bg-neutral shadow-xl p-6">
-        <h1 className="text-4xl font-bold text-center">
+    <div className="relative min-h-screen flex items-center justify-center">
+      {/* Background image */}
+      <div
+        className="absolute inset-0 bg-cover bg-center z-0"
+        style={{ backgroundImage: `url('src/images/regimg.jpg')` }} // update path if needed
+      ></div>
+
+      {/* Dark overlay */}
+      <div className="absolute inset-0 bg-black bg-opacity-60 z-0"></div>
+
+      {/* Frosted glass card */}
+      <div className="relative z-10 backdrop-blur-md bg-white/10 border border-white/20 text-white rounded-xl p-8 w-[400px] shadow-2xl">
+        <h1 className="text-4xl font-bold text-center mb-1">
           Flick<span className="text-red-500">Rate</span>
         </h1>
-        <p className="text-center text-sm mt-1">
+        <p className="text-center text-sm mb-4">
           Share your thoughts on every movie
         </p>
-        <div className="flex justify-center my-4">
+        {/* <div className="flex justify-center mb-4">
           <img
-            src="src\images\regimg.jpg" 
+            src="src/images/regimg.jpg"
             alt="Movie Banner"
             className="rounded-lg w-full h-[150px] object-cover"
           />
-        </div>
-       <h2 className="text-center text-lg font-semibold mb-2">
-          <p className="text-white-400 underline">
-            Register Your Account
-          </p>
+        </div> */}
+        <h2 className="text-center text-lg font-semibold mb-4 underline">
+          Register Your Account
         </h2>
-        <fieldset className="fieldset">
-        <div className="form-control">
-          <label className="label">
-            <span className="label-text text-white">Name:</span>
-          </label>
-          <input type="text" placeholder="Enter your name" className="input input-bordered w-full bg-gray-200 text-black" name='name' required onChange={(e) => {
-          setValues({...values, [e.target.name]: e.target.value})
-        }} />
-        </div>
-        <div className="form-control">
-          <label className="label">
-            <span className="label-text text-white">Email:</span>
-          </label>
-          <input type="email" placeholder="Enter your email" className="input input-bordered w-full bg-gray-200 text-black" name='email' required onChange={(e) => {
-          setValues({...values, [e.target.name]: e.target.value})
-        }} />
-        </div>
-        <div className="form-control">
-          <label className="label">
-            <span className="label-text text-white">Password:</span>
-          </label>
-          <input type="password" placeholder="Enter your password" className="input input-bordered w-full bg-gray-200 text-black" name='password' required onChange={(e) => {
-          setValues({...values, [e.target.name]: e.target.value})
-        }} />
-        </div>
-        <div className="form-control">
-          <label className="label">
-            <span className="label-text text-white">Confirm Password:</span>
-          </label>
-          <input type="password" placeholder="Confirm your password" className="input input-bordered w-full bg-gray-200 text-black" name='confirmpassword' required onChange={(e) => {
-          setValues({...values, [e.target.name]: e.target.value})
-        }} />
-        </div>
-        <div className="flex justify-center mt-4">
-          <button className="btn bg-red-600 text-white w-full hover:bg-red-700" onClick={onSubmit}>
-            Register
-          </button>
-        </div>
+        <fieldset className="space-y-4">
+          <div>
+            <label className="block text-sm">Name:</label>
+            <input
+              type="text"
+              name="name"
+              placeholder="Enter your name"
+              className="input input-bordered w-full bg-white/80 text-black"
+              required
+              onChange={(e) =>
+                setValues({ ...values, [e.target.name]: e.target.value })
+              }
+            />
+          </div>
+          <div>
+            <label className="block text-sm">Email:</label>
+            <input
+              type="email"
+              name="email"
+              placeholder="Enter your email"
+              className="input input-bordered w-full bg-white/80 text-black"
+              required
+              onChange={(e) =>
+                setValues({ ...values, [e.target.name]: e.target.value })
+              }
+            />
+          </div>
+          <div>
+            <label className="block text-sm">Password:</label>
+            <input
+              type="password"
+              name="password"
+              placeholder="Enter your password"
+              className="input input-bordered w-full bg-white/80 text-black"
+              required
+              onChange={(e) =>
+                setValues({ ...values, [e.target.name]: e.target.value })
+              }
+            />
+          </div>
+          <div>
+            <label className="block text-sm">Confirm Password:</label>
+            <input
+              type="password"
+              name="confirmpassword"
+              placeholder="Confirm your password"
+              className="input input-bordered w-full bg-white/80 text-black"
+              required
+              onChange={(e) =>
+                setValues({ ...values, [e.target.name]: e.target.value })
+              }
+            />
+          </div>
+          <div className="mt-4">
+            <button
+              className="btn bg-red-600 text-white w-full hover:bg-red-700"
+              onClick={onSubmit}
+            >
+              Register
+            </button>
+          </div>
         </fieldset>
         <p className="text-center mt-4">
-          Already have an account? <Link to={"/login"} className='text-blue-400 underline'>Login</Link>
+          Already have an account?{' '}
+          <Link to="/login" className="text-blue-400 underline">
+            Login
+          </Link>
         </p>
       </div>
     </div>
