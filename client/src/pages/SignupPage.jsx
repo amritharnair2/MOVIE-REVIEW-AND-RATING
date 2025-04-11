@@ -20,7 +20,7 @@ function SignupPage() {
     userSignup(values)
       .then((res) => {
         localStorage.setItem("token", res.data.token)
-        toast.success("Signup successful!!!")
+        toast.success("User Signup successful!!!")
         dispatch(saveUser(res.data.savedUser))
         navigate("/")
       })
@@ -33,16 +33,11 @@ function SignupPage() {
 
   return (
     <div className="relative min-h-screen flex items-center justify-center">
-      {/* Background image */}
       <div
         className="absolute inset-0 bg-cover bg-center z-0"
-        style={{ backgroundImage: `url('src/images/regimg.jpg')` }} // update path if needed
+        style={{ backgroundImage: `url('src/images/regimg.jpg')` }} 
       ></div>
-
-      {/* Dark overlay */}
       <div className="absolute inset-0 bg-black bg-opacity-60 z-0"></div>
-
-      {/* Frosted glass card */}
       <div className="relative z-10 backdrop-blur-md bg-white/10 border border-white/20 text-white rounded-xl p-8 w-[400px] shadow-2xl">
         <h1 className="text-4xl font-bold text-center mb-1">
           Flick<span className="text-red-500">Rate</span>
@@ -50,13 +45,6 @@ function SignupPage() {
         <p className="text-center text-sm mb-4">
           Share your thoughts on every movie
         </p>
-        {/* <div className="flex justify-center mb-4">
-          <img
-            src="src/images/regimg.jpg"
-            alt="Movie Banner"
-            className="rounded-lg w-full h-[150px] object-cover"
-          />
-        </div> */}
         <h2 className="text-center text-lg font-semibold mb-4 underline">
           Register Your Account
         </h2>

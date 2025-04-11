@@ -1,10 +1,12 @@
 const jwt = require('jsonwebtoken')
-const maxAge = 3 * 24 * 60 *60
 
-const createToken = (id, role="user") => {
-    return jwt.sign({id, role}, process.env.JWT_SECRETE , {
-        expiresIn: maxAge
-    })
+const createToken = (id, role = "user") => {
+    try {
+        const token = jwt.sign({ id: id, role: role }, process.env.JWT_SECRETE);
+        return token;
+    } catch (error) {
+        console.log(error);
+    }
 }
 
 module.exports = createToken

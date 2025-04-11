@@ -51,8 +51,6 @@ function HomePage() {
               </svg>
             </div>
           </div>
-
-          {/* Movie List */}
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {movies.map((movie) => (
               <div

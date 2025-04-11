@@ -6,10 +6,22 @@ import HomePage from "../pages/HomePage";
 import ProtectedRoute from "../components/ProtectedRoute";
 import SingleMoviePage from "../pages/SingleMoviePage";
 import ProfilePage from "../pages/ProfilePage";
+import UnauthorizedPage from "../pages/UnauthorizedPage";
+import AdminRoute from "../components/AdminRoute";
+import AdminPage from "../pages/admin/AdminPage";
 
 
 export const router = createBrowserRouter([
-
+  {
+    path: "/admin",
+    element: <AdminRoute>
+    <AdminPage />
+  </AdminRoute>
+  },
+  {
+    path: "/unauthorized",
+    element: <UnauthorizedPage/>
+  },
     {
       path: "/login",
       element: <LoginPage/>

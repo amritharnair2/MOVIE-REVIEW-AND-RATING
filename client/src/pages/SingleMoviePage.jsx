@@ -59,7 +59,6 @@ const SingleMoviePage = () => {
       </div>
     </div>
 
-    {/* Description */}
     {movie.plot && (
       <p className="mt-6 leading-relaxed">{movie.plot}</p>
     )}

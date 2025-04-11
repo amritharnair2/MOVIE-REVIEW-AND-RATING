@@ -1,19 +1,18 @@
-import { axiosInstance } from "../axios/axiosInstance"
+
+import { userInstance } from "../axios/axiosInstance"
 
 
-
-
-
-export const userSignup = (data) => {
-    return axiosInstance.post("/user/register",data )
-}
 
 export const userLogin = (data) => {
-    return axiosInstance.post("/user/login",data )
+    return userInstance.post("/user/login", data)
+}
+
+export const userSignup = (data) => {
+    return userInstance.post("/user/register",data )
 }
 
 export const userLogout = (data) => {
-    return axiosInstance.post("/user/logout",data )
+    return userInstance.post("/user/logout",data )
 }
 
 

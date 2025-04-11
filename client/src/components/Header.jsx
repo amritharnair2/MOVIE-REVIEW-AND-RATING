@@ -11,6 +11,7 @@ function Header() {
   const navigate = useNavigate()
   const dispatch = useDispatch()
   const { user } = useSelector((state) => state.user);
+
   const handleLogout = () => {
     try {
       userLogout().then(() => {
@@ -39,7 +40,7 @@ function Header() {
   <div className="flex gap-3">
   <ThemeToggle />
   <div className='flex items-center gap-2'>
-  <span className='text-sm'>{user.name}</span>
+  <span className='text-sm'>{user?.name}</span>
     <div className="dropdown dropdown-end">
       <div tabIndex="0" role="button" className="btn btn-ghost btn-circle avatar">
         <div className="w-8 rounded-full">

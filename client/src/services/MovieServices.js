@@ -1,9 +1,10 @@
-import { axiosInstance } from "../axios/axiosInstance";
+
+import { userInstance } from "../axios/axiosInstance"
 
 export const singleMovieDetails = (movieId) => {
-    return axiosInstance.get(`/movie/moviedetails/${movieId}`);
+    return userInstance.get(`/movie/moviedetails/${movieId}`);
 };
   
 export const listMovies = () => {
-    return axiosInstance.get("/movie/listmovies")
+    return userInstance.get("/movie/listmovies")
 }
