@@ -37,6 +37,11 @@ const movieSchema = new mongoose.Schema({
     image: {
         type: String,
         required: true
+    },
+    rating: {
+        type: Number,
+        required: false,
+        default: 0
     }
 
 }, {timestamps: true})

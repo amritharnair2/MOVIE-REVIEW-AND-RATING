@@ -6,13 +6,11 @@ function ProfilePage() {
 
   return (
     <div>
-      <div className="btn btn-ghost btn-circle avatar">
-        <div className="w-44 rounded-full">
+        <div className="w-40 rounded-full">
           <img
             alt="Img"
-            src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQkSaWVN5ig-gqQzzBRyJDY6vBC_oDflVq-og&s" />
+            src={user.profilepic} />
         </div>
-      </div>
       <h1 className='pt-4'>Name: <span className='text-sm'>{user.name}</span>
       </h1>
       <h1>Email: <span className='text-sm'>{user.email}</span>

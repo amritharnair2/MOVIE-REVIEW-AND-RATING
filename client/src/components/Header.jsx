@@ -2,7 +2,7 @@ import React from 'react'
 import ThemeToggle from '../pages/ThemeToggle'
 import { userLogout } from '../services/userServices'
 import { persistor } from '../redux/store'
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { clearUser } from '../redux/features/userSlice';
 import { toast } from "react-toastify";
@@ -10,8 +10,9 @@ import { toast } from "react-toastify";
 function Header() {
   const navigate = useNavigate()
   const dispatch = useDispatch()
-  const { user } = useSelector((state) => state.user);
-
+  // const { user } = useSelector((state) => state.user);
+  const userData = localStorage.getItem('user');
+  const user = JSON.parse(userData);
   const handleLogout = () => {
     try {
       userLogout().then(() => {
@@ -46,7 +47,7 @@ function Header() {
         <div className="w-8 rounded-full">
           <img
             alt="Img"
-            src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQkSaWVN5ig-gqQzzBRyJDY6vBC_oDflVq-og&s" />
+            src={user.profilepic} />
         </div>
       </div>
       <ul

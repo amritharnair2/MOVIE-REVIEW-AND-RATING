@@ -15,4 +15,8 @@ export const userLogout = (data) => {
     return userInstance.post("/user/logout",data )
 }
 
+export const userProfile = (data) => {
+    return userInstance.post("/user/profile",data )
+}
+
 

@@ -10,7 +10,7 @@ module.exports = async (req, res, next) => {
         const decoded = jwt.verify(authToken, process.env.JWT_SECRETE)
         const user = await userDb.findOne({ _id: decoded.id })
         if (!user) return res.json({ error: "User not Found" })
-        req.user = decoded.id
+        req.userId = decoded.id
         next()
     } catch (error) {
         console.log(error, "error");

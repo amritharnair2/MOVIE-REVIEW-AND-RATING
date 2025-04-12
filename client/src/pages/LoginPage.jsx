@@ -16,6 +16,10 @@ function LoginPage() {
 
   const onSubmit = async () => {
     userLogin(values).then((res) => {
+    localStorage.setItem('user', JSON.stringify(res.data.userObject));
+      const userData = localStorage.getItem('user');
+      const user = JSON.parse(userData);
+      console.log(user)
       localStorage.setItem("token", res.data.token)
       toast.success("User Login successful!!!"); 
       dispatch(saveUser(res.data.userObject))

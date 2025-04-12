@@ -1,5 +1,6 @@
 const mongoose = require("mongoose");
 const Review = require("../models/reviewModel");
+const movieDb = require("../models/movieModel");
 
 //Add a new Review
 const addReview = async (req, res) => {
@@ -10,7 +11,27 @@ const addReview = async (req, res) => {
       }
       const newReview = new Review({ user, movie, rating, review });
       await newReview.save();
-      res.status(201).json({message: "Review added successfully",newReview});
+
+      // res.status(201).json({message: "Review added successfully",newReview});
+
+      // const newReview = new Review(req.body);
+      // await newReview.save();
+      const avgRating = await Review.aggregate([
+        {
+          $match: { movie: movie }
+        },
+        {
+          $group: {
+            _id: "$movie",
+            avgRating: { $avg: "$rating" }
+          },
+        },
+      ]);
+      const avgRatingValue = avgRating[0]?.avgRating || 0
+      await movieDb.findByIdAndUpdate(req.body.movie, {
+        rating: avgRatingValue
+      })
+      res.status(201).json({message: "Review added successfully", review: newReview});
     } catch (error) {
         return res.status(error.status || 500).json({error: error.message || "Internal server error"})
     }
@@ -26,7 +47,7 @@ const getMovieReviews = async (req, res) => {
         const reviews = await Review.find({ movie: movieId })
             .populate("user", "name email") 
             .sort({ createdAt: -1 }); 
-            return res.status(200).json({message: "Reviews", reviews});
+            return res.status(200).json(reviews);
     } catch (error) {
         return res.status(error.status || 500).json({error: error.message || "Internal server error"})
     }

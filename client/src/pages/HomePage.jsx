@@ -29,7 +29,6 @@ function HomePage() {
         </div>
       ) : (
         <>
-          {/* Search input */}
           <div className="flex justify-start mb-5">
             <div className="relative w-full max-w-[700px]">
               <input
@@ -54,13 +53,13 @@ function HomePage() {
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {movies.map((movie) => (
               <div
-              key={movie?._id}
-              className="border border-gray-300 p-3 shadow-md dark:border-gray-700"
+              key={movie?._id} 
+              className="border border-gray-300 p-3 shadow-md dark:border-gray-700 cursor-pointer"  onClick={() => navigate(`/movie/${movie._id}`)}
             >
                 <img
                   src={movie?.image}
                   alt="Movie"
-                  className="w-full h-60 pb-3"
+                  className="w-full h-60 pb-3 rounded"
                 />
                 <h1 className="text-xl font-semibold">{movie?.name}  
                   <span> ({new Date(movie?.releaseDate).getFullYear()})</span>
@@ -77,16 +76,8 @@ function HomePage() {
                 <div className="flex justify-between text-sm my-3">
                   <span>Rating</span>
                   <span>
-                    <StarRating rating={movie?.rating} />
+                   <StarRating rating={movie?.rating} />
                   </span>
-                </div>
-                <div className="flex justify-end mt-3">
-                  <button
-                    className="btn btn-sm btn-primary"
-                    onClick={() => navigate(`/movie/${movie._id}`)}
-                  >
-                    View Details
-                  </button>
                 </div>
               </div>
             ))}

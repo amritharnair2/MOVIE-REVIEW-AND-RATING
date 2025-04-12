@@ -1,9 +1,10 @@
 const express = require("express");
 const { addReview , getMovieReviews, updateReview, deleteReview, getUserReviews} = require("../../controllers/reviewController");
+const AuthMiddleware = require("../../middlewares/AuthMiddleware");
 
 const reviewRouter = express.Router();
 
-reviewRouter.post("/addreview",  addReview); // Add Review
+reviewRouter.post("/addreview", AuthMiddleware, addReview); // Add Review
 reviewRouter.get("/getreview/:movieId", getMovieReviews); // Get Reviews by Movie
 reviewRouter.get("/userreview/:userId",  getUserReviews); // Get Reviews by User
 reviewRouter.put('/updatereview/:id', updateReview); // Update Review

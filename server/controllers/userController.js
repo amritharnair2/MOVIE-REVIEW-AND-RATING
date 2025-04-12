@@ -39,9 +39,12 @@ const register = async (req,res) => {
 
         const savedUser = await newUser.save()
         if(savedUser) {
-            const token = createToken(savedUser._id)
-            //res.cookie("token", token)
-            return res.status(201).json({message: "User created successfully", savedUser, token})
+            const userObject = savedUser.toObject()
+            delete userObject.password
+
+        const token = createToken(savedUser._id)
+        //res.cookie("token", token)
+        return res.status(200).json({message: "User Signup successfull", userObject, token})
         }
 
     } catch (error) {
@@ -85,7 +88,7 @@ const login = async (req, res) => {
 //user profile
 const userProfile = async (req, res) => {
     try {
-        const userId = req.user;
+        const userId = req.userId;
         const user = await userDb.findById(userId).select("-password")
         return res.status(200).json(user)
     } catch (error) {
@@ -97,7 +100,7 @@ const userProfile = async (req, res) => {
 //update user
 const updateUser = async (req, res) => {
     try {
-        const userId = req.user
+        const userId = req.userId
         const updatedUser = await userDb.findByIdAndUpdate(userId, req.body, { new: true })
         res.status(200).json({ message: "user updated", updatedUser })
     } catch (error) {
