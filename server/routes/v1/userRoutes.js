@@ -1,12 +1,12 @@
 const { register, login, logout, updateUser, deleteUser, userProfile } = require('../../controllers/userController')
 const AuthMiddleware = require('../../middlewares/AuthMiddleware')
-
+const upload = require('../../middlewares/multer')
 const userRouter = require('express').Router()
 
 userRouter.post("/register", register) //Register
 userRouter.post("/login", login) //login
-userRouter.patch("/update", AuthMiddleware, updateUser) //user update
-userRouter.get("/profile", AuthMiddleware, userProfile)
+userRouter.patch("/update", AuthMiddleware, upload.single("profilepic"), updateUser)  //update
+userRouter.get("/profile", AuthMiddleware, userProfile) //view profile
 userRouter.delete("/deleteuser/:userId", deleteUser) //delete user
 userRouter.post("/logout", logout) //logout
 

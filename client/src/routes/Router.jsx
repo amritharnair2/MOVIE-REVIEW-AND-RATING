@@ -9,6 +9,7 @@ import ProfilePage from "../pages/ProfilePage";
 import UnauthorizedPage from "../pages/UnauthorizedPage";
 import AdminRoute from "../components/AdminRoute";
 import AdminPage from "../pages/admin/AdminPage";
+import EditProfile from "../pages/EditProfile";
 
 
 export const router = createBrowserRouter([
@@ -51,8 +52,11 @@ export const router = createBrowserRouter([
           path: "profile",   
           element: <ProfilePage />,
         }
-
-  
+        ,
+        {
+          path: "editprofile",
+          element: <EditProfile />
+        }
       ]
 
     }

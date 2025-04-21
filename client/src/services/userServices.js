@@ -19,4 +19,8 @@ export const userProfile = (data) => {
     return userInstance.post("/user/profile",data )
 }
 
+export const userUpdate = (data) => {
+    return userInstance.patch("/user/update",data )
+}
+
 

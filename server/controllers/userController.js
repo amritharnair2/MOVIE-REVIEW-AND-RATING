@@ -1,6 +1,7 @@
 const userDb = require("../models/userModel");
 const createToken = require("../utilities/generateToken");
 const { hashPassword, comparePassword } = require("../utilities/passwordUtilities");
+const uploadToCloudinary = require("../utilities/imageUpload");
 
 //Register for new user
 const register = async (req,res) => {
@@ -100,13 +101,46 @@ const userProfile = async (req, res) => {
 //update user
 const updateUser = async (req, res) => {
     try {
-        const userId = req.userId
-        const updatedUser = await userDb.findByIdAndUpdate(userId, req.body, { new: true })
-        res.status(200).json({ message: "user updated", updatedUser })
-    } catch (error) {
-        console.log(error);
-        res.status(error.status || 500).json({ error: error.message || "Internal server error" })
-    }
+        const userId = req.userId; 
+        const { name, email, oldPassword, newPassword, confirmNewPassword } = req.body;
+    
+        const user = await userDb.findById(userId);
+        if (!user) return res.status(404).json({ message: "User not found" });
+    
+        if (name) user.name = name;
+        if (email) user.email = email;
+    
+        // Update password if provided
+        if (oldPassword || newPassword || confirmNewPassword) {
+          if (!oldPassword || !newPassword || !confirmNewPassword) {
+            return res.status(400).json({ message: "All password fields are required" });
+          }
+    
+          const isMatch = await comparePassword(oldPassword, user.password);
+          if (!isMatch) {
+            return res.status(401).json({ message: "Old password is incorrect" });
+          }
+    
+          if (newPassword !== confirmNewPassword) {
+            return res.status(400).json({ message: "New passwords do not match" });
+          }
+    
+          const hashedPassword = await hashPassword(newPassword)
+          user.password = hashedPassword;
+        }
+    
+        if (req.file) {
+            const cloudinaryResponse = await uploadToCloudinary(req.file.path); 
+            user.profilepic = cloudinaryResponse; 
+          }
+
+    
+        const updatedUser = await user.save();
+        res.status(200).json({ message: "Profile updated successfully", updatedUser});
+      } catch (error) {
+        console.error("Update Error:", error);
+        res.status(500).json({ message: "Server Error" });
+      }
 }
 
 //delete user

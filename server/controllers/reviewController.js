@@ -17,21 +17,21 @@ const addReview = async (req, res) => {
       // const newReview = new Review(req.body);
       // await newReview.save();
       const avgRating = await Review.aggregate([
-        {
-          $match: { movie: movie }
-        },
+        { $match: { movie: movie } },
         {
           $group: {
             _id: "$movie",
-            avgRating: { $avg: "$rating" }
+            avgRating: { $avg: "$rating" },
           },
         },
       ]);
-      const avgRatingValue = avgRating[0]?.avgRating || 0
-      await movieDb.findByIdAndUpdate(req.body.movie, {
-        rating: avgRatingValue
-      })
-      res.status(201).json({message: "Review added successfully", review: newReview});
+  
+      const avgRatingValue = avgRating[0]?.avgRating || 0;
+  
+      await movieDb.findByIdAndUpdate(movie, {
+        rating: avgRatingValue,
+      });
+      res.status(201).json({message: "Review added successfully", review: newReview,  avgRating: avgRatingValue.toFixed(1)});
     } catch (error) {
         return res.status(error.status || 500).json({error: error.message || "Internal server error"})
     }

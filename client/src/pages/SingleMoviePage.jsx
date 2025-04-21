@@ -12,6 +12,19 @@ const SingleMoviePage = () => {
   const { movieId } = useParams();
   const [showReviewForm, setShowReviewForm] = useState(false);
   const [reviews, setReviews] = useState([]);
+  const formatDate = (dateString) => {
+    const date = new Date(dateString);
+  const options = {
+    day: '2-digit',
+    month: 'short',
+    year: 'numeric',
+  };
+  const formattedDate = date.toLocaleDateString('en-GB', options); // 20 Jan 2025
+
+  const time = date.toTimeString().split(' ')[0]; // HH:MM:SS
+  return `${formattedDate}, ${time}`;
+  };
+  
   const handleReviewSubmit = async ({ rating, review }) => {
     try {
       const userData = localStorage.getItem('user');
@@ -34,8 +47,8 @@ const SingleMoviePage = () => {
       console.log("Sending payload:", payload);
       const res = await addReview(payload);
       setReviews((prev) => {
-        if (!Array.isArray(prev)) return [res.data.review]; // Get the actual review object
-        return [...prev, res.data.review]; // Add just the review object to the array
+        if (!Array.isArray(prev)) return [res.data.review]; 
+        return [...prev, res.data.review]; 
       });   
       toast.success("Review added!", { position: "top-center" });
       fetchReviews();
@@ -51,7 +64,6 @@ const SingleMoviePage = () => {
     const userId = user?._id;
     
     return reviews.some(review => 
-      // Check if review.user is an object or string ID
       (typeof review.user === 'object' ? review.user._id === userId : review.user === userId)
     );
   };
@@ -62,10 +74,9 @@ const SingleMoviePage = () => {
     const filledStars = rating || 0;
     const emptyStars = totalStars - filledStars;
     
-    // Create filled stars and empty stars
     const stars = [
-      ...Array(filledStars).fill('★'), // Filled stars (yellow)
-      ...Array(emptyStars).fill('☆')  // Empty stars (gray)
+      ...Array(filledStars).fill('★'),
+      ...Array(emptyStars).fill('☆')  
     ];
 
     return stars.map((star, idx) => (
@@ -79,12 +90,10 @@ const SingleMoviePage = () => {
   useEffect(() => {
     if (!movieId) return;
   
-    // Fetch movie details
     singleMovieDetails(movieId)
       .then((res) => setMovie(res.data))
       .catch((err) => console.error("Error fetching movie:", err));
   
-    // Fetch movie reviews
     getMovieReviews(movieId)
       .then((res) => setReviews(res.data))
       .catch((err) => console.error("Error fetching reviews:", err));
@@ -99,6 +108,7 @@ const SingleMoviePage = () => {
     singleMovieDetails(movieId)
       .then((res) => {
         setMovie(res.data);
+        console.log(res.data)
       })
       .catch((err) => {
         console.error("Error fetching movie:", err);
@@ -130,6 +140,9 @@ const SingleMoviePage = () => {
 
         <p className="font-semibold">Genre:</p>
         <p>{movie.genre}</p>
+
+        <p className="font-semibold">Rating:</p>
+        <p>{movie.rating}</p>
 
         <p className="font-semibold">Release Date:</p>
         <p>{new Date(movie.releaseDate).toLocaleDateString("en-GB", {
@@ -167,7 +180,6 @@ const SingleMoviePage = () => {
   )}
 </div>
 
-{/* Review Modal */}
 <ReviewForm
   show={showReviewForm}
   onClose={() => setShowReviewForm(false)}
@@ -182,9 +194,10 @@ const SingleMoviePage = () => {
 <div className="space-y-4">
   {reviews.length > 0 ? (
     reviews.map((rev, idx) => (
-      <div key={idx} className="p-4 border rounded shadow-sm">
-        <div className="flex items-center gap-2">
+      <div key={idx} className="p-4 border  border-black dark:border-white rounded shadow-sm">
+        <div className="flex justify-between items-center gap-2">
           <span className="font-bold">{rev?.user?.name || "User"}</span>
+          <span className="text-sm text-gray-400">{formatDate(rev.updatedAt)}</span>
         </div>
         {typeof rev.rating === "number" && rev.rating > 0 && rev.rating <= 5 ? (
           <div className="text-yellow-500">{renderStars(rev.rating)}</div>

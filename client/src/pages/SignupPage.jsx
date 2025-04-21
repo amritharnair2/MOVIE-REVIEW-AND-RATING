@@ -25,7 +25,7 @@ function SignupPage() {
         console.log(user)
         localStorage.setItem("token", res.data.token)
         toast.success("User Signup successful!!!")
-        dispatch(saveUser(res.data.savedUser))
+        dispatch(saveUser(res.data.userObject))
         navigate("/")
       })
       .catch((err) => {
