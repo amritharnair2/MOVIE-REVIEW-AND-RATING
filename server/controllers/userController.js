@@ -158,20 +158,9 @@ const deleteUser = async (req, res) => {
     }
 }
 
-//logout
-const logout = async (req,res) => {
-    try {
-        return res.status(200).json({message: "User logout successfull"})
-    } catch (error) {
-        console.log(error)
-        res.status(error.status || 500).json({error: error.message || "Internal server error"})
-    }
-}
-
 module.exports = {
     register,
     login,
-    logout,
     updateUser,
     deleteUser,
     userProfile

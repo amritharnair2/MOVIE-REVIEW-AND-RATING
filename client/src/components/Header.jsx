@@ -1,6 +1,5 @@
 import React from 'react'
 import ThemeToggle from '../pages/ThemeToggle'
-import { userLogout } from '../services/userServices'
 import { persistor } from '../redux/store'
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
@@ -14,13 +13,11 @@ function Header() {
   const user = JSON.parse(userData);
   const handleLogout = () => {
     try {
-      userLogout().then(() => {
         persistor.purge()
         localStorage.removeItem("token");
         dispatch(clearUser())
         toast.success("User Logout successful!!!");
         navigate("/login");
-      })
     } catch (error) {
       console.log(error)
     }

@@ -11,11 +11,6 @@ export const userSignup = (data) => {
     return userInstance.post("/user/register",data )
 }
 
-//user logout
-export const userLogout = (data) => {
-    return userInstance.post("/user/logout",data )
-}
-
 //user profile
 export const userProfile = (data) => {
     return userInstance.post("/user/profile",data )
