@@ -1,41 +1,24 @@
 const mongoose = require("mongoose");
 const Review = require("../models/reviewModel");
 const movieDb = require("../models/movieModel");
+const updateMovieAvgRating = require("../utilities/updateMovieAvgRating");
 
 //Add a new Review
 const addReview = async (req, res) => {
-    try {
-      const { user, movie, rating, review } = req.body;
-      if (!user || !movie || !rating || !review) {
-        return res.status(400).json({error: "All fields are required"})
-      }
-      const newReview = new Review({ user, movie, rating, review });
-      await newReview.save();
-
-      // res.status(201).json({message: "Review added successfully",newReview});
-
-      // const newReview = new Review(req.body);
-      // await newReview.save();
-      const avgRating = await Review.aggregate([
-        { $match: { movie: movie } },
-        {
-          $group: {
-            _id: "$movie",
-            avgRating: { $avg: "$rating" },
-          },
-        },
-      ]);
-  
-      const avgRatingValue = avgRating[0]?.avgRating || 0;
-  
-      await movieDb.findByIdAndUpdate(movie, {
-        rating: avgRatingValue,
-      });
-      res.status(201).json({message: "Review added successfully", review: newReview,  avgRating: avgRatingValue.toFixed(1)});
-    } catch (error) {
-        return res.status(error.status || 500).json({error: error.message || "Internal server error"})
+  try {
+    const { user, movie, rating, review } = req.body;
+    if (!user || !movie || !rating || !review) {
+      return res.status(400).json({error: "All fields are required"})
     }
+    const newReview = new Review({ user, movie, rating, review });
+    await newReview.save();
+   
+    const updatedMovie = await updateMovieAvgRating(movie);
+    res.status(201).json({message: "Review added successfully", review: newReview,  avgRating: updatedMovie.rating, updatedMovie});
+  } catch (error) {
+      return res.status(error.status || 500).json({error: error.message || "Internal server error"})
   }
+}
   
 //Get Reviews of a specific movie
 const getMovieReviews = async (req, res) => {
@@ -61,7 +44,7 @@ const getUserReviews = async (req, res) => {
         return res.status(400).json({message: "User ID is required in URL params.",
         });
       }
-      const userReviews = await Review.find({ user: userId }).populate('movie', 'title'); 
+      const userReviews = await Review.find({ user: userId }).populate('movie', 'name'); 
   
       if (!userReviews || userReviews.length === 0) {
         return res.status(404).json({message: "No reviews found for this user."});
@@ -85,13 +68,15 @@ const updateReview = async (req, res) => {
       const updatedReview = await Review.findByIdAndUpdate(reviewId,
         { rating, review },
         { new: true, runValidators: true }
-      );
+      ).populate('movie'); ;
   
       if (!updatedReview) {
         return res.status(404).json({error: "Review not found."});
       }
-  
-      return res.status(200).json({message: "Review updated successfully",review: updatedReview});
+      
+      const updatedMovie = await updateMovieAvgRating(updatedReview.movie);
+
+      return res.status(200).json({message: "Review updated successfully",review: updatedReview, avgRating: updatedMovie.rating, updatedMovie});
   
     } catch (error) {
       return  res.status(error.status || 500).json({error: error.message || "Internal server error"})
@@ -110,8 +95,10 @@ const deleteReview = async (req, res) => {
       if (!deletedReview) {
         return res.status(404).json({error: "Review not found."});
       }
+
+      const updatedMovie = await updateMovieAvgRating(deletedReview.movie);
   
-      return res.status(200).json({message: "Review deleted successfully."});
+      return res.status(200).json({message: "Review deleted successfully.", avgRating: updatedMovie.rating, updatedMovie});
   
     } catch (error) {
       return res.status(error.status || 500).json({error: error.message || "Internal server error"})

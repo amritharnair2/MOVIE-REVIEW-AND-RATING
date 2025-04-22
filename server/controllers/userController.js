@@ -147,11 +147,9 @@ const updateUser = async (req, res) => {
 const deleteUser = async (req, res) => {
     try {
         const { userId } = req.params
-
         if (!mongoose.Types.ObjectId.isValid(userId)) {
             return res.status(400).json({ error: "Invalid id" })
         }
-
         await userDb.findByIdAndDelete(userId)
         return res.status(200).json("user deleted")
     } catch (error) {
@@ -163,7 +161,6 @@ const deleteUser = async (req, res) => {
 //logout
 const logout = async (req,res) => {
     try {
-        res.clearCookie("token")
         return res.status(200).json({message: "User logout successfull"})
     } catch (error) {
         console.log(error)

@@ -57,7 +57,6 @@ function EditProfilePage() {
 
   return (
     <div className="flex items-center justify-center">
-      <div />
       <div>
         <h1 className="text-3xl font-bold text-center mb-4">Edit Profile</h1>
         <fieldset className="space-y-4">
@@ -75,7 +74,7 @@ function EditProfilePage() {
             <label className="block text-sm">Old Password:</label>
             <input type={showOld ? 'text' : 'password'} name="oldPassword" placeholder="Enter old password"
               className="input input-bordered w-full bg-white/80 text-black" onChange={handleChange} />
-            <div className="absolute right-2 top-9 cursor-pointer" onClick={() => setShowOld(!showOld)}>
+            <div className="absolute right-2 top-9 cursor-pointer text-black" onClick={() => setShowOld(!showOld)}>
               {showOld ? <EyeOff size={18} /> : <Eye size={18} />}
             </div>
           </div>
@@ -83,7 +82,7 @@ function EditProfilePage() {
             <label className="block text-sm">New Password:</label>
             <input type={showNew ? 'text' : 'password'} name="newPassword" placeholder="Enter new password"
               className="input input-bordered w-full bg-white/80 text-black" onChange={handleChange} />
-            <div className="absolute right-2 top-9 cursor-pointer" onClick={() => setShowNew(!showNew)}>
+            <div className="absolute right-2 top-9 cursor-pointer text-black" onClick={() => setShowNew(!showNew)}>
               {showNew ? <EyeOff size={18} /> : <Eye size={18} />}
             </div>
           </div>
@@ -91,7 +90,7 @@ function EditProfilePage() {
             <label className="block text-sm">Confirm New Password:</label>
             <input type={showConfirm ? 'text' : 'password'} name="confirmNewPassword" placeholder="Confirm password"
               className="input input-bordered w-full bg-white/80 text-black" onChange={handleChange} />
-            <div className="absolute right-2 top-9 cursor-pointer" onClick={() => setShowConfirm(!showConfirm)}>
+            <div className="absolute right-2 top-9 cursor-pointer text-black" onClick={() => setShowConfirm(!showConfirm)}>
               {showConfirm ? <EyeOff size={18} /> : <Eye size={18} />}
             </div>
           </div>

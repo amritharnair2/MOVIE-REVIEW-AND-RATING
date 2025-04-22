@@ -106,12 +106,29 @@ const deleteMovie = async (req,res) => {
     }
 }
 
+
+//Search a movie
+const searchMovie = async (req, res) => {
+    try {
+      const searchQuery = req.query.search || "";
+      const movies = await movieDb.find({
+        name: { $regex: searchQuery, $options: "i" }
+      });
+      res.status(200).json(movies);
+    } catch (error) {
+        console.log(error)
+        res.status(error.status || 500).json({error: error.message || "Internal server error"})
+    }
+  };
+
+
 module.exports = {
     addMovie, 
     listMovies,
     movieDetails,
     updateMovie,
-    deleteMovie
+    deleteMovie,
+    searchMovie
 }
 
 

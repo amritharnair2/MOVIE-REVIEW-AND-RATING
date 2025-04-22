@@ -14,7 +14,7 @@ export const getMovieReviews = (movieId) => {
 
 // Get all reviews by a specific user
 export const getUserReviews = (userId) => {
-  return userInstance.get(`/review/userreview/${userId}`);
+  return userInstance.get(`review/userreview/${userId}`);
 };
 
 // Update a review by review ID

@@ -22,12 +22,11 @@ function Footer() {
           <div className="flex flex-col items-center mx-auto text-center">
             <p className="text-sm">&copy; 2025 FlickRate. All rights reserved.</p>
             <div className="flex justify-center gap-4 mt-1 text-sm">
-              <a href="#" className="text-gray-400 hover:text-white">Privacy Policy</a>
-              <a href="#" className="text-gray-400 hover:text-white">Terms of Service</a>
-              <a href="#" className="text-gray-400 hover:text-white">Contact</a>
+              <a href="#" className="text-gray-400 hover:text-red">Privacy Policy</a>
+              <a href="#" className="text-gray-400 hover:text-red">Terms of Service</a>
+              <a href="#" className="text-gray-400 hover:text-red">Contact</a>
             </div>
           </div>
-
         </div>
       </footer>
     </div>

@@ -5,7 +5,6 @@ export const userInstance = axios.create({
     baseURL: url
 })
 
-
 userInstance.interceptors.request.use((request) => {
     const token = localStorage.getItem("token")
     request.headers.Authorization = `Bearer ${token}`
