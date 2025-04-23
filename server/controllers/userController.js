@@ -2,6 +2,7 @@ const userDb = require("../models/userModel");
 const createToken = require("../utilities/generateToken");
 const { hashPassword, comparePassword } = require("../utilities/passwordUtilities");
 const uploadToCloudinary = require("../utilities/imageUpload");
+const isAdmin = require("../middlewares/isAdmin");
 
 //Register for new user
 const register = async (req,res) => {
@@ -67,6 +68,10 @@ const login = async (req, res) => {
         if(!userExist) {
             return res.status(400).json({error: "User not found"})
         }
+
+        // if (isAdmin && userExist.role !== "admin") {
+        //     return res.status(403).json({ error: "Not authorized as admin" });
+        //   }
 
         const passwordMatch = await comparePassword(password, userExist.password)
         if(!passwordMatch) {
@@ -158,10 +163,24 @@ const deleteUser = async (req, res) => {
     }
 }
 
+
+//list users
+const listUsers = async (req,res) => {
+    try {
+        const usersList = await userDb.find()
+        return res.status(200).json(usersList)
+        
+    } catch (error) {
+        console.log(error)
+        res.status(error.status || 500).json({error: error.message || "Internal server error"})
+    }
+}
+
 module.exports = {
     register,
     login,
     updateUser,
     deleteUser,
-    userProfile
+    userProfile,
+    listUsers
 }

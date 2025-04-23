@@ -2,6 +2,7 @@ const mongoose = require("mongoose");
 const Review = require("../models/reviewModel");
 const movieDb = require("../models/movieModel");
 const updateMovieAvgRating = require("../utilities/updateMovieAvgRating");
+const reviewDb = require("../models/reviewModel");
 
 //Add a new Review
 const addReview = async (req, res) => {
@@ -104,6 +105,20 @@ const deleteReview = async (req, res) => {
       return res.status(error.status || 500).json({error: error.message || "Internal server error"})
     }
   };
+
+  //list reviews
+  const listReviews = async (req,res) => {
+    try {
+        const reviewsList = await reviewDb.find()
+        .populate('user', 'name')       // Populate only the 'name' field of the user
+  .populate('movie', 'name');     // Populate only the 'name' field of the movie
+        return res.status(200).json(reviewsList)
+        
+    } catch (error) {
+        console.log(error)
+        res.status(error.status || 500).json({error: error.message || "Internal server error"})
+    }
+}
   
 
 module.exports = {
@@ -111,5 +126,6 @@ module.exports = {
     getMovieReviews,
     getUserReviews,
     updateReview,
-    deleteReview
+    deleteReview,
+    listReviews
 };

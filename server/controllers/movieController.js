@@ -80,8 +80,8 @@ const updateMovie = async (req,res) => {
         }
 
         const updatedMovie = await movieDb.findByIdAndUpdate(movieId, 
-            {name, language, releaseDate, genre, director, hero, heroine, plot, poster: imageUrl},
-            {new: true}
+            {name, language, releaseDate, genre, director, hero, heroine, plot, image: imageUrl},
+            { new: true, runValidators: true }
         )
         return res.status(200).json({message: "Movie updated successfully", updatedMovie})
 

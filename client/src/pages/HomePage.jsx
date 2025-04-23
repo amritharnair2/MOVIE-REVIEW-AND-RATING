@@ -4,8 +4,6 @@ import { useNavigate } from 'react-router-dom';
 import StarRating from '../components/StarRating';
 import debounce from 'lodash.debounce';
 
-// ...imports remain unchanged
-
 function HomePage() {
   const navigate = useNavigate();
   const [movies, setMovies] = useState([]);

@@ -11,6 +11,7 @@ module.exports = async (req, res, next) => {
         const user = await userDb.findOne({ _id: decoded.id })
         if (!user) return res.json({ error: "User not Found" })
         req.userId = decoded.id
+        req.userRole = user.role;
         next()
     } catch (error) {
         console.log(error, "error");

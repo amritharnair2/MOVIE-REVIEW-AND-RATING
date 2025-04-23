@@ -7,8 +7,8 @@ export const singleMovieDetails = (movieId) => {
 };
   
 //list all movies
-export const listMovies = () => {
-    return userInstance.get("/movie/listmovies")
+export const listMovies = (data) => {
+    return userInstance.get("/movie/listmovies", data)
 }
 
 //search movies

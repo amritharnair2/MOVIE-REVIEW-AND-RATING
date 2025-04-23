@@ -7,17 +7,58 @@ import ProtectedRoute from "../components/ProtectedRoute";
 import SingleMoviePage from "../pages/SingleMoviePage";
 import ProfilePage from "../pages/ProfilePage";
 import UnauthorizedPage from "../pages/UnauthorizedPage";
-import AdminRoute from "../components/AdminRoute";
+import AdminRoute from "../components/Admin/AdminRoute";
 import AdminPage from "../pages/admin/AdminPage";
 import EditProfile from "../pages/EditProfile";
+import AdminLoginPage from "../pages/admin/AdminLogin";
+import AdminLayout from "../layout/AdminLayout";
+import AdminUsersPage from "../pages/admin/UserPage";
+import AdminReviewsPage from "../pages/admin/ReviewPage";
+import AddMovie from "../pages/admin/AddMovie";
+import SingleMovie from "../pages/admin/SingleMovie"
+import UpdateMoviePage from "../pages/admin/UpdateMovie";
 
 
 export const router = createBrowserRouter([
   {
     path: "/admin",
-    element: <AdminRoute>
-    <AdminPage />
-  </AdminRoute>
+    element: (
+      <AdminRoute>
+        <AdminLayout />
+      </AdminRoute>
+    ),
+    errorElement: <h1>Error Page</h1>,
+    children: [
+      {
+        index: true,
+        element: <AdminPage />,
+      },
+      {
+        path: "review",
+        element: <AdminReviewsPage />,
+      },
+      {
+        path: "user",
+        element: <AdminUsersPage />,
+      },
+      {
+        path: "addmovie",
+        element: <AddMovie />,
+      },
+      {
+        path: "updatemovie/:movieId",
+        element: <UpdateMoviePage />,
+      },
+      {
+        path: "singlemovie/:movieId",
+        element: <SingleMovie />,
+      },
+
+    ]
+  },
+  {
+    path: "admin/login",
+    element: <AdminLoginPage/>
   },
   {
     path: "/unauthorized",
