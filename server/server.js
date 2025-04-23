@@ -14,6 +14,11 @@ app.use(cors({
 }))
 dbConnection()
 
+app.get("/", (req, res) => [
+        res.json("Server started")
+    ])
+    
+
 app.use("/api", apiRouter)
 
 app.listen(process.env.PORT, () => {
