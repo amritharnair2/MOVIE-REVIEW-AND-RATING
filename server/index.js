@@ -32,7 +32,7 @@ const allowedOrigins = [
 
 dbConnection()
 
-app.get("/api/v1", (req, res) => [
+app.get("/", (req, res) => [
         res.json("Server started")
     ])
     
