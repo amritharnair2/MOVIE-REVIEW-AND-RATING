@@ -14,8 +14,8 @@ app.use(cookieparser())
 // }))
 
 const allowedOrigins = [
-        'https://movie-review-and-rating.vercel.app',
-        'https://movie-review-and-rating-6wda.vercel.app'
+        'https://movie-review-and-rating.vercel.app/',
+        'https://movie-review-and-rating-rafk.vercel.app'
       ];
       
       app.use(cors({
@@ -27,6 +27,7 @@ const allowedOrigins = [
           }
         },
         credentials: true, // If you're using cookies/auth headers
+        methods: ['get', 'post', 'delete', 'put', 'option']
       }));
 
 dbConnection()
