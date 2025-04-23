@@ -21,6 +21,10 @@ import UpdateMoviePage from "../pages/admin/UpdateMovie";
 
 export const router = createBrowserRouter([
   {
+    path: "/admin/login",
+    element: <AdminLoginPage/>
+  },
+  {
     path: "/admin",
     element: (
       <AdminRoute>
@@ -55,10 +59,6 @@ export const router = createBrowserRouter([
       },
 
     ]
-  },
-  {
-    path: "/admin/login",
-    element: <AdminLoginPage/>
   },
   {
     path: "/unauthorized",
