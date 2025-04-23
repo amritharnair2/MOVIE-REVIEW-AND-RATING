@@ -27,8 +27,7 @@ const allowedOrigins = [
             callback(new Error('Not allowed by CORS'));
           }
         },
-        credentials: true, // If you're using cookies/auth headers
-        methods: ['get', 'post', 'delete', 'put', 'option']
+        credentials: true, 
       }));
 
 dbConnection()
