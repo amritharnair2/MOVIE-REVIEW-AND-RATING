@@ -14,8 +14,9 @@ app.use(cookieparser())
 // }))
 
 const allowedOrigins = [
-        'https://movie-review-and-rating.vercel.app/',
-        'https://movie-review-and-rating-rafk.vercel.app'
+        'https://movie-review-and-rating-rafk.vercel.app',
+        'http://localhost:5173'
+
       ];
       
       app.use(cors({
@@ -32,7 +33,7 @@ const allowedOrigins = [
 
 dbConnection()
 
-app.get("/", (req, res) => [
+app.get("/api/v1", (req, res) => [
         res.json("Server started")
     ])
     
