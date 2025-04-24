@@ -15,7 +15,8 @@ function LoginPage() {
   const navigate = useNavigate()
   const dispatch = useDispatch()
 
-  const onSubmit = async () => {
+  const handleSubmit = async (e) => {
+    e.preventDefault()
     userLogin(values).then((res) => {
     localStorage.setItem('user', JSON.stringify(res.data.userObject));
       const userData = localStorage.getItem('user');
@@ -31,6 +32,11 @@ function LoginPage() {
       })
     })
   }
+
+  const handleChange = (e) => {
+    setValues({ ...values, [e.target.name]: e.target.value })
+}
+
 
   
   
@@ -56,42 +62,26 @@ function LoginPage() {
         <h2 className="text-center text-lg font-semibold mb-4 underline">
           Login To Your Account
         </h2>
-        <fieldset className="space-y-4">
-          <div>
-            <label className="block text-sm">Email:</label>
-            <input
-              type="email"
-              name="email"
-              placeholder="Enter your Email"
-              className="input input-bordered w-full bg-white/80 text-black"
-              required
-              onChange={(e) =>
-                setValues({ ...values, [e.target.name]: e.target.value })
-              }
-            />
-          </div>
-          <div>
-            <label className="block text-sm">Password:</label>
-            <input
-              type="password"
-              name="password"
-              placeholder="Enter your password"
-              className="input input-bordered w-full bg-white/80 text-black"
-              required
-              onChange={(e) =>
-                setValues({ ...values, [e.target.name]: e.target.value })
-              }
-            />
-          </div>
-          <div className="mt-4">
-            <button
-              className="btn bg-red-600 text-white w-full hover:bg-red-700"
-              onClick={onSubmit}
-            >
-              Login
-            </button>
-          </div>
-        </fieldset>
+        <form className="card-body" onSubmit={handleSubmit}>
+                        <div className="form-control">
+                            <label className="label">
+                                <span className="label-text text-sm text-white">Email</span>
+                            </label>
+                            <input type="email" name='email' placeholder="email" className="input input-bordered w-full bg-white/80 text-black" onChange={handleChange} required />
+                        </div>
+                        <div className="form-control">
+                            <label className="label">
+                                <span className="label-text text-sm text-white">Password</span>
+                            </label>
+                            <input type="password" name="password" placeholder="password" className="input input-bordered w-full bg-white/80 text-black" onChange={handleChange} required />
+                            <label className="label">
+                                <a href="#" className="label-text-alt link link-hover">Forgot password?</a>
+                            </label>
+                        </div>
+                        <div>
+                            <button className="btn bg-red-600 text-white w-full hover:bg-red-700">Login</button>
+                        </div>
+                    </form>
         <p className="text-center mt-4">
           Don’t have an account?{' '}
           <Link to="/signup" className="text-blue-400 underline">
