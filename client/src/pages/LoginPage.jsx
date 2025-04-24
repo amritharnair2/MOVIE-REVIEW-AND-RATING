@@ -4,6 +4,7 @@ import { useDispatch } from 'react-redux'
 import { toast } from 'react-toastify'
 import { userLogin } from '../services/userServices'
 import { saveUser } from '../redux/features/userSlice'
+import regImg from '../../images/regimg.jpg';
 
 function LoginPage() {
   const [values, setValues] = useState({
@@ -38,7 +39,7 @@ function LoginPage() {
     <div className="relative min-h-screen flex items-center justify-center">
       <div
         className="absolute inset-0 bg-cover bg-center z-0"
-        style={{ backgroundImage: `url('src/images/regimg.jpg')` }}
+        style={{ backgroundImage: `url(${regImg})` }}
       ></div>
 
       {/* Overlay */}
