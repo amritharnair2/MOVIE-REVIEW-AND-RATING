@@ -63,65 +63,65 @@ function HomePage() {
 
   return (
     <div>
-   <div className="flex flex-col lg:flex-row justify-between mb-5 gap-4">
-  {/* Search Input */}
-  <div className="w-full lg:w-[40%] mt-6">
-    <div className="relative">
-      <input
-        type="text"
-        placeholder="Search Movie"
-        className="input input-bordered w-full pr-12 text-lg"
-        onChange={handleSearchChange}
-      />
-      <svg
-        className="absolute right-4 top-1/2 transform -translate-y-1/2 h-6 w-6 text-gray-500"
-        fill="currentColor"
-        viewBox="0 0 20 20"
-      >
-        <path
-          fillRule="evenodd"
-          d="M8 4a4 4 0 100 8 4 4 0 000-8zm-6 4a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.817-4.817A6 6 0 012 8z"
-          clipRule="evenodd"
-        />
-      </svg>
-    </div>
-  </div>
+      <div className="flex flex-col lg:flex-row justify-between mb-5 gap-4">
+        {/* Search Input */}
+        <div className="w-full lg:w-[40%] mt-6">
+          <div className="relative">
+            <input
+              type="text"
+              placeholder="Search Movie"
+              className="input input-bordered w-full pr-12 text-lg"
+              onChange={handleSearchChange}
+            />
+            <svg
+              className="absolute right-4 top-1/2 transform -translate-y-1/2 h-6 w-6 text-gray-500"
+              fill="currentColor"
+              viewBox="0 0 20 20"
+            >
+              <path
+                fillRule="evenodd"
+                d="M8 4a4 4 0 100 8 4 4 0 000-8zm-6 4a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.817-4.817A6 6 0 012 8z"
+                clipRule="evenodd"
+              />
+            </svg>
+          </div>
+        </div>
 
-  {/* Language Filter */}
-  <div className="w-full lg:w-[20%]">
-    <label className="block mb-1 text-sm">Select Language</label>
-    <select
-      className="select select-bordered w-full"
-      value={languageFilter}
-      onChange={(e) => setLanguageFilter(e.target.value)}
-    >
-      <option>All</option>
-      <option>English</option>
-      <option>Malayalam</option>
-      <option>Hindi</option>
-      <option>Tamil</option>
-      <option>Telugu</option>
-    </select>
-  </div>
+        {/* Language Filter */}
+        <div className="w-full lg:w-[20%]">
+          <label className="block mb-1 text-sm">Select Language</label>
+          <select
+            className="select select-bordered w-full"
+            value={languageFilter}
+            onChange={(e) => setLanguageFilter(e.target.value)}
+          >
+            <option>All</option>
+            <option>English</option>
+            <option>Malayalam</option>
+            <option>Hindi</option>
+            <option>Tamil</option>
+            <option>Telugu</option>
+          </select>
+        </div>
 
-  {/* Genre Filter */}
-  <div className="w-full lg:w-[20%]">
-    <label className="block mb-1 text-sm">Select Genre</label>
-    <select
-      className="select select-bordered w-full"
-      value={genreFilter}
-      onChange={(e) => setGenreFilter(e.target.value)}
-    >
-      <option>All</option>
-      <option>Action</option>
-      <option>Drama</option>
-      <option>Comedy</option>
-      <option>Romance</option>
-      <option>Thriller</option>
-      <option>Crime</option>
-    </select>
-  </div>
-</div>
+        {/* Genre Filter */}
+        <div className="w-full lg:w-[20%]">
+          <label className="block mb-1 text-sm">Select Genre</label>
+          <select
+            className="select select-bordered w-full"
+            value={genreFilter}
+            onChange={(e) => setGenreFilter(e.target.value)}
+          >
+            <option>All</option>
+            <option>Action</option>
+            <option>Drama</option>
+            <option>Comedy</option>
+            <option>Romance</option>
+            <option>Thriller</option>
+            <option>Crime</option>
+          </select>
+        </div>
+      </div>
 
       {/* Movie Cards */}
       {loading ? (
@@ -137,7 +137,7 @@ function HomePage() {
           {movies.map((movie) => (
             <div
               key={movie?._id}
-               className="border border-gray-300 p-3 shadow-md dark:border-gray-700 cursor-pointer transition-transform duration-300 hover:scale-[1.02] hover:shadow-lg hover:border-primary dark:hover:border-blue-400"
+              className="border border-gray-300 p-3 shadow-md dark:border-gray-700 cursor-pointer transition-transform duration-300 hover:scale-[1.02] hover:shadow-lg hover:border-primary dark:hover:border-blue-400"
               onClick={() => navigate(`/movie/${movie._id}`)}
             >
               <img

@@ -46,7 +46,7 @@ function AddMovie() {
       const res = await addMovie(formData);
       setMessage(res.message);
       toast.success("Movie added successfully")
-      setTimeout(() => navigate("/admin"), 2000); 
+      setTimeout(() => navigate("/admin"), 2000);
     } catch (err) {
       setMessage(err?.error || "Something went wrong");
     }

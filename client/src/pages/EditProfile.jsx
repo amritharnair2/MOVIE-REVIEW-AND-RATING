@@ -43,7 +43,7 @@ function EditProfilePage() {
     if (values.profilepic) formData.append('profilepic', values.profilepic);
 
     try {
-      const res = await userUpdate(formData); 
+      const res = await userUpdate(formData);
       const updatedUser = res.data.updatedUser;
       console.log(updatedUser)
       toast.success('Profile updated successfully!');

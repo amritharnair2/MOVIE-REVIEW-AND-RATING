@@ -48,7 +48,6 @@ const SingleMoviePage = () => {
 
       toast.success("Review added!", { position: "top-center" });
       console.log(res)
-      // Refetch updated reviews
       const updatedReviews = await getMovieReviews(movieId);
       setReviews(updatedReviews?.data);
       setShowReviewForm(false);
@@ -69,26 +68,6 @@ const SingleMoviePage = () => {
         : review.user === userId
     );
   };
-
-  // const renderStars = (rating) => {
-  //   const totalStars = 5;
-  //   const filledStars = rating || 0;
-  //   const emptyStars = totalStars - filledStars;
-
-  //   const stars = [
-  //     ...Array(filledStars).fill("★"),
-  //     ...Array(emptyStars).fill("☆"),
-  //   ];
-
-  //   return stars.map((star, idx) => (
-  //     <span
-  //       key={idx}
-  //       className={star === "★" ? "text-yellow-500" : "text-gray-300"}
-  //     >
-  //       {star}
-  //     </span>
-  //   ));
-  // };
 
   useEffect(() => {
     if (!movieId) return;
@@ -212,8 +191,8 @@ const SingleMoviePage = () => {
                 </span>
               </div>
               {typeof rev.rating === "number" &&
-              rev.rating > 0 &&
-              rev.rating <= 5 ? (
+                rev.rating > 0 &&
+                rev.rating <= 5 ? (
                 <div className="text-yellow-500 mt-2"> <StarRating rating={rev.rating} /></div>
               ) : (
                 <p>No rating yet</p>

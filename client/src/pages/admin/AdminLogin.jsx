@@ -19,9 +19,9 @@ function AdminLoginPage() {
   };
 
   const handleSubmit = async (e) => {
-    e.preventDefault(); 
+    e.preventDefault();
     try {
-      const response = await adminLogin(values); 
+      const response = await adminLogin(values);
       const { adminObject, token } = response;
       localStorage.setItem('admin-token', token);
       localStorage.setItem('admin', JSON.stringify(adminObject));
@@ -53,47 +53,47 @@ function AdminLoginPage() {
           Admin Login
         </h1>
         <form className="card-body" onSubmit={handleSubmit}>
-                  <div className="form-control">
-                    <label className="label">
-                      <span className="label-text text-sm text-white">Email</span>
-                    </label>
-                    <input
-                      type="email"
-                      name="email"
-                      placeholder="Enter your email"
-                      className="input input-bordered w-full bg-white/80 text-black"
-                      onChange={handleChange}
-                      required
-                    />
-                  </div>
-        
-                  <div className="form-control relative">
-                    <label className="label">
-                      <span className="label-text text-sm text-white">Password</span>
-                    </label>
-                    <input
-                      type={showPassword ? 'text' : 'password'}
-                      name="password"
-                      placeholder="Enter your password"
-                      className="input input-bordered w-full bg-white/80 text-black pr-10"
-                      onChange={handleChange}
-                      required
-                    />
-                    <span
-                      className="absolute right-3 top-9 cursor-pointer text-black"
-                      onClick={() => setShowPassword(!showPassword)}
-                    >
-                      {showPassword ? <FaEyeSlash /> : <FaEye />}
-                    </span>
-                    <label className="label mt-1">
-                      <a href="#" className="label-text-alt link link-hover">Forgot password?</a>
-                    </label>
-                  </div>
-        
-                  <div>
-                    <button className="btn bg-red-600 text-white w-full hover:bg-red-700">Login</button>
-                  </div>
-                </form>
+          <div className="form-control">
+            <label className="label">
+              <span className="label-text text-sm text-white">Email</span>
+            </label>
+            <input
+              type="email"
+              name="email"
+              placeholder="Enter your email"
+              className="input input-bordered w-full bg-white/80 text-black"
+              onChange={handleChange}
+              required
+            />
+          </div>
+
+          <div className="form-control relative">
+            <label className="label">
+              <span className="label-text text-sm text-white">Password</span>
+            </label>
+            <input
+              type={showPassword ? 'text' : 'password'}
+              name="password"
+              placeholder="Enter your password"
+              className="input input-bordered w-full bg-white/80 text-black pr-10"
+              onChange={handleChange}
+              required
+            />
+            <span
+              className="absolute right-3 top-9 cursor-pointer text-black"
+              onClick={() => setShowPassword(!showPassword)}
+            >
+              {showPassword ? <FaEyeSlash /> : <FaEye />}
+            </span>
+            <label className="label mt-1">
+              <a href="#" className="label-text-alt link link-hover">Forgot password?</a>
+            </label>
+          </div>
+
+          <div>
+            <button className="btn bg-red-600 text-white w-full hover:bg-red-700">Login</button>
+          </div>
+        </form>
       </div>
     </div>
   );

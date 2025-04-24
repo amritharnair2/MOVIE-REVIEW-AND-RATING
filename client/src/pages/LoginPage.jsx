@@ -69,7 +69,6 @@ function LoginPage() {
               required
             />
           </div>
-
           <div className="form-control relative">
             <label className="label">
               <span className="label-text text-sm text-white">Password</span>

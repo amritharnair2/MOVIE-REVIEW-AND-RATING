@@ -1,4 +1,3 @@
-
 import { userInstance } from "../axios/axiosInstance"
 
 //Get a single movie details

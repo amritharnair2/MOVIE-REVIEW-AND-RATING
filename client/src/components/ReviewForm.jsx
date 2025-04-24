@@ -13,8 +13,6 @@ const ReviewForm = ({ show, onClose, onSubmit }) => {
     }
 
     await onSubmit({ rating, review });
-
-    // Reset the form
     setRating(0);
     setReview("");
     onClose();
@@ -52,7 +50,6 @@ const ReviewForm = ({ show, onClose, onSubmit }) => {
           onChange={(e) => setReview(e.target.value)}
         />
 
-       
         <div className="modal-action">
           <button className="btn btn-success" onClick={handleSubmit}>Submit</button>
           <button className="btn btn-outline" onClick={onClose}>Cancel</button>

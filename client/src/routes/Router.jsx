@@ -22,7 +22,7 @@ import UpdateMoviePage from "../pages/admin/UpdateMovie";
 export const router = createBrowserRouter([
   {
     path: "/admin/login",
-    element: <AdminLoginPage/>
+    element: <AdminLoginPage />
   },
   {
     path: "/admin",
@@ -62,45 +62,45 @@ export const router = createBrowserRouter([
   },
   {
     path: "/unauthorized",
-    element: <UnauthorizedPage/>
+    element: <UnauthorizedPage />
   },
-    {
-      path: "/login",
-      element: <LoginPage/>
-    },
-    {
-      path: "/signup",
-      element: <SignupPage/>
-    },
-    {
-      path: "/",
-      element: (
-        <ProtectedRoute>
-          <UserLayout />
-        </ProtectedRoute>
-      ),
-      errorElement: <h1>Error Page</h1>,
-      children: [
-        {
-          index: true,
-          element: <HomePage />,
-        },
-        {
-          path: "movie/:movieId",   
-          element: <SingleMoviePage />,
-        },
-        {
-          path: "profile",   
-          element: <ProfilePage />,
-        }
-        ,
-        {
-          path: "editprofile",
-          element: <EditProfile />
-        }
-      ]
+  {
+    path: "/login",
+    element: <LoginPage />
+  },
+  {
+    path: "/signup",
+    element: <SignupPage />
+  },
+  {
+    path: "/",
+    element: (
+      <ProtectedRoute>
+        <UserLayout />
+      </ProtectedRoute>
+    ),
+    errorElement: <h1>Error Page</h1>,
+    children: [
+      {
+        index: true,
+        element: <HomePage />,
+      },
+      {
+        path: "movie/:movieId",
+        element: <SingleMoviePage />,
+      },
+      {
+        path: "profile",
+        element: <ProfilePage />,
+      }
+      ,
+      {
+        path: "editprofile",
+        element: <EditProfile />
+      }
+    ]
 
-    }
-    
-  ]);
+  }
+
+]);
 

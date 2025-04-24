@@ -13,11 +13,11 @@ function Header() {
   const user = JSON.parse(userData);
   const handleLogout = () => {
     try {
-        persistor.purge()
-        localStorage.removeItem("token");
-        dispatch(clearUser())
-        toast.success("User Logout successful!!!");
-        navigate("/login");
+      persistor.purge()
+      localStorage.removeItem("token");
+      dispatch(clearUser())
+      toast.success("User Logout successful!!!");
+      navigate("/login");
     } catch (error) {
       console.log(error)
     }

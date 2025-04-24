@@ -6,7 +6,6 @@ export const addReview = (reviewData) => {
   return userInstance.post("/review/addreview", reviewData);
 };
 
-
 // Get all reviews for a specific movie
 export const getMovieReviews = (movieId) => {
   return userInstance.get(`/review/getreview/${movieId}`);

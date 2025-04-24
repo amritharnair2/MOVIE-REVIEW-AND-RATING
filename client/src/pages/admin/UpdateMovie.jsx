@@ -54,26 +54,16 @@ function UpdateMoviePage() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-  
-    // Create FormData including ALL fields (even empty ones)
     const formData = new FormData();
     for (let key in movieData) {
       formData.append(key, movieData[key]);
     }
-  
     if (image) {
       formData.append("image", image);
     }
-  
-    // Debug what's in the FormData
-    // console.log("FormData contents:");
-    // for (let [key, value] of formData.entries()) {
-    //   console.log(`${key}: ${value}`);
-    // }
-  
     try {
       const res = await updateMovie(movieId, formData);
-    console.log(res)
+      console.log(res)
       toast.success("Movie updated successfully!");
       navigate("/admin")
     } catch (err) {
@@ -93,9 +83,9 @@ function UpdateMoviePage() {
       <form onSubmit={handleSubmit}>
         <fieldset className="space-y-4">
           {[{ name: "name", label: "Movie Name", type: "text" },
-            { name: "director", label: "Director", type: "text" },
-            { name: "hero", label: "Hero", type: "text" },
-            { name: "heroine", label: "Heroine", type: "text" }].map((field) => (
+          { name: "director", label: "Director", type: "text" },
+          { name: "hero", label: "Hero", type: "text" },
+          { name: "heroine", label: "Heroine", type: "text" }].map((field) => (
             <div className="mb-4" key={field.name}>
               <label className="block text-sm mb-2">{field.label}:</label>
               <input
@@ -124,7 +114,6 @@ function UpdateMoviePage() {
               <option>Telugu</option>
             </select>
           </div>
-
           <div className="mb-4">
             <label className="block text-sm mb-2">Genre:</label>
             <select
@@ -142,7 +131,6 @@ function UpdateMoviePage() {
               <option>Crime</option>
             </select>
           </div>
-
           <div className="mb-4">
             <label className="block text-sm mb-2">Release Date:</label>
             <input
@@ -153,7 +141,6 @@ function UpdateMoviePage() {
               onChange={handleChange}
             />
           </div>
-
           <div className="mb-4">
             <label className="block text-sm mb-2">Plot Summary:</label>
             <textarea
@@ -165,7 +152,6 @@ function UpdateMoviePage() {
               onChange={handleChange}
             ></textarea>
           </div>
-
           <div className="mb-4">
             <label className="block text-sm mb-2">Movie Poster:</label>
             <input
@@ -176,7 +162,6 @@ function UpdateMoviePage() {
               onChange={handleImageChange}
             />
           </div>
-
           <button type="submit" className="btn btn-primary w-full">
             Update Movie
           </button>

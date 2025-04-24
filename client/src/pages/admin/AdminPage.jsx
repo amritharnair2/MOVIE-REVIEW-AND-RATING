@@ -33,27 +33,24 @@ const AdminPage = () => {
   const handleViewDetails = (movieId) => {
     navigate(`/admin/singlemovie/${movieId}`);
   };
-  
 
+  const handleDeleteMovie = async (movieId) => {
+    try {
+      const confirmDelete = window.confirm("Are you sure you want to delete this movie?");
+      if (!confirmDelete) return;
 
-    const handleDeleteMovie = async (movieId) => {
-      try {
-        const confirmDelete = window.confirm("Are you sure you want to delete this movie?");
-        if (!confirmDelete) return;
-    
-        await deleteMovie(movieId); 
-        setMovies(movies.filter((movie) => movie._id !== movieId)); 
-        toast.success('Movie deleted successfully');
-      } catch (error) {
-        console.error('Error deleting movie:', error);
-        toast.error('Failed to delete movie');
-      }
-    };
+      await deleteMovie(movieId);
+      setMovies(movies.filter((movie) => movie._id !== movieId));
+      toast.success('Movie deleted successfully');
+    } catch (error) {
+      console.error('Error deleting movie:', error);
+      toast.error('Failed to delete movie');
+    }
+  };
 
   return (
     <div className="text-white font-serif">
-      {/* Main Content */}
-      <main className="text-white">
+      <div className="text-white">
         <div className="flex justify-between items-center mb-4">
           <h2 className="text-2xl font-bold text-black">Movies</h2>
           <button
@@ -63,7 +60,6 @@ const AdminPage = () => {
             Add Movie
           </button>
         </div>
-
         <table className="w-full text-left  table border-black mt-5">
           <thead className="bg-gray-300 text-black">
             <tr>
@@ -89,9 +85,9 @@ const AdminPage = () => {
                 <td className="p-2 border text-center border-black text-black">{movie.language}</td>
                 <td className="p-2 border border-black">
                   <div className="flex justify-center items-center gap-2">
-                  <button className="text-green-600 hover:text-green-800" onClick={() => handleViewDetails(movie._id)}>
-      <Eye />
-    </button>
+                    <button className="text-green-600 hover:text-green-800" onClick={() => handleViewDetails(movie._id)}>
+                      <Eye />
+                    </button>
                     <button onClick={() => handleUpdateMovie(movie._id)} className="text-blue-600 hover:text-blue-800">
                       <Pencil />
                     </button>
@@ -100,13 +96,11 @@ const AdminPage = () => {
                     </button>
                   </div>
                 </td>
-
               </tr>
             ))}
           </tbody>
-
         </table>
-      </main>
+      </div>
     </div>
   );
 };

@@ -2,7 +2,6 @@ import React, { useEffect, useState } from 'react';
 import { listReviews } from '../../services/AdminServices';
 import StarRating from '../../components/StarRating';
 
-
 const AdminReviewsPage = () => {
   const [reviews, setReviews] = useState([]);
   useEffect(() => {
@@ -19,7 +18,6 @@ const AdminReviewsPage = () => {
     };
     fetchReviews();
   }, []);
-
 
   const formatDate = (dateString) => {
     const date = new Date(dateString)
@@ -55,7 +53,6 @@ const AdminReviewsPage = () => {
                 <td className="p-2 border border-black text-black">{review.review}</td>
                 <td className="p-2 border border-black text-black">  <StarRating rating={review.rating} /></td>
                 <td className="p-2 border border-black text-black">{formatDate(review.createdAt)}</td>
-
               </tr>
             ))}
           </tbody>

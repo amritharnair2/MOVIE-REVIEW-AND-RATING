@@ -45,7 +45,6 @@ function SignupPage() {
     setValues({ ...values, [e.target.name]: e.target.value })
   }
 
-
   return (
     <div className="relative min-h-screen flex items-center justify-center">
       <div
