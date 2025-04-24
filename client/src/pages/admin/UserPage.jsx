@@ -38,7 +38,7 @@ const AdminUsersPage = () => {
     return `${formattedDate}, ${time}`;
   };
 
- const handleDelete = async (userId) => {
+  const handleDelete = async (userId) => {
     try {
       const confirmDelete = window.confirm("Are you sure you want to delete this user?");
       if (!confirmDelete) return;
@@ -58,7 +58,9 @@ const AdminUsersPage = () => {
         <section>
           <h2 className="text-2xl font-bold text-black">Users</h2>
           {loading ? (
-            <p className="loading loading-spinner loading-xl flex justify-center items-center h-screen"></p>
+            <div className="text-center py-4">
+              <div className="inline-block w-6 h-6 border-4 border-t-transparent border-primary border-solid rounded-full animate-spin"></div>
+            </div>
           ) : error ? (
             <p className="text-red-500">{error}</p>
           ) : (
@@ -74,9 +76,9 @@ const AdminUsersPage = () => {
               <tbody>
                 {users.map((user) => (
                   <tr key={user._id} className="bg-white border border-black">
-                    <td className="p-2 border border-black text-black">{user.name}</td>
-                    <td className="p-2 border border-black text-black">{user.email}</td>
-                    <td className="p-2 border border-black text-black">{formatDate(user.createdAt)}</td>
+                    <td className="p-2 border border-black text-black">{user?.name}</td>
+                    <td className="p-2 border border-black text-black">{user?.email}</td>
+                    <td className="p-2 border border-black text-black">{formatDate(user?.createdAt)}</td>
                     <td className="p-2 border border-black text-black">
                       <button
                         onClick={() => handleDelete(user._id)}
@@ -84,7 +86,7 @@ const AdminUsersPage = () => {
                       >
                         Delete
                       </button>
-                    </td> 
+                    </td>
                   </tr>
                 ))}
               </tbody>

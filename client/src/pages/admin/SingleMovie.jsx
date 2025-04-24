@@ -91,8 +91,8 @@ const SingleMovie = () => {
       <h2 className="my-3 text-xl font-bold">Reviews</h2>
       <div className="space-y-4">
         {loadingReviews ? (
-          <div className="flex justify-center">
-            <span className="loading loading-spinner loading-md text-primary"></span>
+          <div className="text-center py-4">
+            <div className="inline-block w-6 h-6 border-4 border-t-transparent border-primary border-solid rounded-full animate-spin"></div>
           </div>
         ) : reviews.length > 0 ? (
           reviews.map((rev, idx) => (

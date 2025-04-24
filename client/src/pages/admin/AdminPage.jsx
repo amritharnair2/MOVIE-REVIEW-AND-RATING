@@ -9,6 +9,7 @@ import { listMovies } from '../../services/MovieServices';
 const AdminPage = () => {
   const navigate = useNavigate();
   const [movies, setMovies] = useState([]);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const fetchMovies = async () => {
@@ -17,6 +18,9 @@ const AdminPage = () => {
         setMovies(res.data);
       } catch (err) {
         console.log(err);
+      }
+      finally {
+        setLoading(false);
       }
     };
     fetchMovies();
@@ -60,46 +64,53 @@ const AdminPage = () => {
             Add Movie
           </button>
         </div>
-        <table className="w-full text-left  table border-black mt-5">
-          <thead className="bg-gray-300 text-black">
-            <tr>
-              <th className="p-2 border text-center border-black w-1/6">Movie</th>
-              <th className="p-2 border text-center border-black w-1/6">Name</th>
-              <th className="p-2 border text-center border-black w-1/6">Release Date</th>
-              <th className="p-2 border text-center border-black w-1/6">Genre</th>
-              <th className="p-2 border text-center border-black w-1/6">Language</th>
-              <th className="p-2 border text-center border-black w-1/6">Action</th>
-            </tr>
-          </thead>
-          <tbody>
-            {movies.map((movie) => (
-              <tr key={movie._id} className="bg-white border border-black">
-                <td className="p-2 border border-black">
-                  <img src={movie.image} alt={movie.name} className="w-full h-auto object-cover" />
-                </td>
-                <td className="p-2 border text-center border-black text-black">{movie.name}</td>
-                <td className="p-2 border text-center border-black text-black">
-                  {new Date(movie.releaseDate).toLocaleDateString('en-GB')}
-                </td>
-                <td className="p-2 border text-center border-black text-black">{movie.genre}</td>
-                <td className="p-2 border text-center border-black text-black">{movie.language}</td>
-                <td className="p-2 border border-black">
-                  <div className="flex justify-center items-center gap-2">
-                    <button className="text-green-600 hover:text-green-800" onClick={() => handleViewDetails(movie._id)}>
-                      <Eye />
-                    </button>
-                    <button onClick={() => handleUpdateMovie(movie._id)} className="text-blue-600 hover:text-blue-800">
-                      <Pencil />
-                    </button>
-                    <button onClick={() => handleDeleteMovie(movie._id)} className="text-red-600 hover:text-red-800">
-                      <Trash2 />
-                    </button>
-                  </div>
-                </td>
+
+        {loading ? (
+          <div className="text-center py-4">
+            <div className="inline-block w-6 h-6 border-4 border-t-transparent border-primary border-solid rounded-full animate-spin"></div>
+          </div>
+        ) : (
+          <table className="w-full text-left table border-black mt-5">
+            <thead className="bg-gray-300 text-black">
+              <tr>
+                <th className="p-2 border text-center border-black w-1/6">Movie</th>
+                <th className="p-2 border text-center border-black w-1/6">Name</th>
+                <th className="p-2 border text-center border-black w-1/6">Release Date</th>
+                <th className="p-2 border text-center border-black w-1/6">Genre</th>
+                <th className="p-2 border text-center border-black w-1/6">Language</th>
+                <th className="p-2 border text-center border-black w-1/6">Action</th>
               </tr>
-            ))}
-          </tbody>
-        </table>
+            </thead>
+            <tbody>
+              {movies.map((movie) => (
+                <tr key={movie._id} className="bg-white border border-black">
+                  <td className="p-2 border border-black">
+                    <img src={movie.image} alt={movie.name} className="w-full h-auto object-cover" />
+                  </td>
+                  <td className="p-2 border text-center border-black text-black">{movie.name}</td>
+                  <td className="p-2 border text-center border-black text-black">
+                    {new Date(movie.releaseDate).toLocaleDateString('en-GB')}
+                  </td>
+                  <td className="p-2 border text-center border-black text-black">{movie.genre}</td>
+                  <td className="p-2 border text-center border-black text-black">{movie.language}</td>
+                  <td className="p-2 border border-black">
+                    <div className="flex justify-center items-center gap-2">
+                      <button className="text-green-600 hover:text-green-800" onClick={() => handleViewDetails(movie._id)}>
+                        <Eye />
+                      </button>
+                      <button onClick={() => handleUpdateMovie(movie._id)} className="text-blue-600 hover:text-blue-800">
+                        <Pencil />
+                      </button>
+                      <button onClick={() => handleDeleteMovie(movie._id)} className="text-red-600 hover:text-red-800">
+                        <Trash2 />
+                      </button>
+                    </div>
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        )}
       </div>
     </div>
   );
