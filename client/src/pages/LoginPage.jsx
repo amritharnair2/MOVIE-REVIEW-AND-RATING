@@ -19,9 +19,14 @@ function LoginPage() {
     userLogin(values).then((res) => {
       localStorage.setItem('user', JSON.stringify(res.data.userObject));
       localStorage.setItem('token', res.data.token);
-      dispatch(saveUser(res.data.userObject));
-      toast.success("User Login successful!!!");
-      navigate("/");
+      const user = res.data.userObject
+      dispatch(saveUser(user));
+      if (user.role === 'admin') {
+        navigate("/admin/login");
+      } else {
+        toast.success("User Login successful!!!");
+        navigate("/");
+      }
     }).catch((err) => {
       toast.error(err.response?.data?.error || 'Login failed', {
         position: 'top-center'
