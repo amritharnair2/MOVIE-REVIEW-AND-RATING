@@ -125,28 +125,28 @@ const SingleMoviePage = () => {
   return (
     <div>
       <div className="max-w-5xl">
-        <h2 className="text-3xl font-bold mb-6">{movie.name}</h2>
+        <h2 className="text-3xl font-bold mb-6">{movie?.name}</h2>
 
         <div className="flex flex-col md:flex-row gap-10">
           <img
-            src={movie.image}
-            alt={movie.name}
+            src={movie?.image}
+            alt={movie?.name}
             className="w-full md:w-1/3 h-auto object-cover"
           />
 
           <div className="flex-1 grid grid-cols-[auto_1fr] gap-x-32 gap-y-1 text-sm sm:text-base">
             <p className="font-semibold">Language:</p>
-            <p>{movie.language}</p>
+            <p>{movie?.language}</p>
 
             <p className="font-semibold">Genre:</p>
-            <p>{movie.genre}</p>
+            <p>{movie?.genre}</p>
 
             <p className="font-semibold">Rating:</p>
-            <p>{movie.rating}</p>
+            <p>{movie?.rating}</p>
 
             <p className="font-semibold">Release Date:</p>
             <p>
-              {new Date(movie.releaseDate).toLocaleDateString("en-GB", {
+              {new Date(movie?.releaseDate).toLocaleDateString("en-GB", {
                 day: "2-digit",
                 month: "2-digit",
                 year: "numeric",
@@ -154,17 +154,17 @@ const SingleMoviePage = () => {
             </p>
 
             <p className="font-semibold">Director:</p>
-            <p>{movie.director}</p>
+            <p>{movie?.director}</p>
 
             <p className="font-semibold">Hero:</p>
-            <p>{movie.hero}</p>
+            <p>{movie?.hero}</p>
 
             <p className="font-semibold">Heroine:</p>
-            <p>{movie.heroine}</p>
+            <p>{movie?.heroine}</p>
           </div>
         </div>
 
-        {movie.plot && <p className="mt-6 leading-relaxed">{movie.plot}</p>}
+        {movie?.plot && <p className="mt-6 leading-relaxed">{movie?.plot}</p>}
       </div>
 
       <hr className="my-4 border-black dark:border-white" />
