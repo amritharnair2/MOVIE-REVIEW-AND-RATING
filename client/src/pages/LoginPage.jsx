@@ -4,7 +4,7 @@ import { useDispatch } from 'react-redux'
 import { toast } from 'react-toastify'
 import { userLogin } from '../services/userServices'
 import { saveUser } from '../redux/features/userSlice'
-import regImg from '../../images/regimg.jpg';
+import regImg from '../images/regimg.jpg';
 
 function LoginPage() {
   const [values, setValues] = useState({
