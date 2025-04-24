@@ -50,8 +50,8 @@ const AdminReviewsPage = () => {
           <tbody>
             {reviews.map((review) => (
               <tr key={review._id} className="bg-white border border-black">
-                <td className="p-2 border border-black text-black">{review.user.name}</td>
-                <td className="p-2 border border-black text-black">{review.movie.name}</td>
+                <td className="p-2 border border-black text-black">{review?.user?.name || 'Unknown User'}</td>
+                <td className="p-2 border border-black text-black">{review?.movie?.name || 'Unknown Movie'}</td>
                 <td className="p-2 border border-black text-black">{review.review}</td>
                 <td className="p-2 border border-black text-black">  <StarRating rating={review.rating} /></td>
                 <td className="p-2 border border-black text-black">{formatDate(review.createdAt)}</td>
