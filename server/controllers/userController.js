@@ -2,7 +2,6 @@ const userDb = require("../models/userModel");
 const createToken = require("../utilities/generateToken");
 const { hashPassword, comparePassword } = require("../utilities/passwordUtilities");
 const uploadToCloudinary = require("../utilities/imageUpload");
-const isAdmin = require("../middlewares/isAdmin");
 
 //Register for new user
 const register = async (req,res) => {
