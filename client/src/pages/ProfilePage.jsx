@@ -111,7 +111,7 @@ function ProfilePage() {
                   userReviews.map((review) => (
                     <tr key={review._id} className="border-b border-gray-200">
                       <td className="p-3">
-                        {review.movie.name || review.movie?.title || 'Untitled'}
+                        {review?.movie?.name || review?.movie?.title || 'Untitled'}
                       </td>
                       <td className="p-3">
                         <div className="flex text-xl">
@@ -119,10 +119,10 @@ function ProfilePage() {
                         </div>
                       </td>
                       <td className="p-3">
-                        {review.review || review.content || 'No comment'}
+                        {review?.review || review?.content || 'No comment'}
                       </td>
                       <td className="p-3">
-                        {review.date || new Date(review.createdAt).toLocaleString()}
+                        {review?.date || new Date(review?.createdAt).toLocaleString()}
                       </td>
                       <td className="p-3">
                         <div className="flex space-x-3">
