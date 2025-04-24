@@ -1,6 +1,6 @@
 const express = require("express");
-const { addReview , getMovieReviews, updateReview, deleteReview, getUserReviews, listReviews} = require("../../controllers/reviewController");
-const AuthMiddleware = require("../../middlewares/AuthMiddleware");
+const { addReview , getMovieReviews, updateReview, deleteReview, getUserReviews, listReviews} = require("../controllers/reviewController");
+const AuthMiddleware = require("../middlewares/AuthMiddleware");
 
 const reviewRouter = express.Router();
 

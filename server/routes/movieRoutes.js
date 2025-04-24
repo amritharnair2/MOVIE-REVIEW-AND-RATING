@@ -1,7 +1,7 @@
-const { addMovie, listMovies, movieDetails, updateMovie, deleteMovie, searchMovie } = require('../../controllers/movieController')
+const { addMovie, listMovies, movieDetails, updateMovie, deleteMovie, searchMovie } = require('../controllers/movieController')
 
 const movieRouter = require('express').Router()
-const upload = require('../../middlewares/multer')
+const upload = require('../middlewares/multer')
 
 movieRouter.post("/create", upload.single("image"), addMovie) //add a movie
 movieRouter.get("/listmovies", listMovies) //list all movies

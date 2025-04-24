@@ -1,6 +1,6 @@
-const { register, login, updateUser, deleteUser, userProfile, listUsers } = require('../../controllers/userController')
-const AuthMiddleware = require('../../middlewares/AuthMiddleware')
-const upload = require('../../middlewares/multer')
+const { register, login, updateUser, deleteUser, userProfile, listUsers } = require('../controllers/userController')
+const AuthMiddleware = require('../middlewares/AuthMiddleware')
+const upload = require('../middlewares/multer')
 const userRouter = require('express').Router()
 
 userRouter.post("/register", register) //Register

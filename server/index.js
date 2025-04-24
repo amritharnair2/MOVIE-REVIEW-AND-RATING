@@ -1,8 +1,11 @@
 const express = require('express')
 const { dbConnection } = require('./config/dbConnection')
-const apiRouter = require('./routes')
 const cors = require('cors')
 const cookieparser = require('cookie-parser')
+const { userRouter } = require('./routes/userRoutes')
+const movieRouter = require('./routes/movieRoutes')
+const reviewRouter = require('./routes/reviewRoutes')
+const { adminRouter } = require('./routes/adminRoutes')
 require('dotenv').config()
 
 const app = express()
@@ -36,8 +39,11 @@ app.get("/", (req, res) => [
         res.json("Server started")
     ])
     
-
-app.use("/api", apiRouter)
+    
+    app.use("/user", userRouter)
+    app.use("/movie", movieRouter)
+    app.use("/review", reviewRouter)
+    app.use("/admin", adminRouter)
 
 app.listen(process.env.PORT, () => {
         console.log(`server starts at port ${process.env.PORT}`)
