@@ -50,7 +50,7 @@ const SingleMoviePage = () => {
       console.log(res)
       // Refetch updated reviews
       const updatedReviews = await getMovieReviews(movieId);
-      setReviews(updatedReviews.data);
+      setReviews(updatedReviews?.data);
       setShowReviewForm(false);
     } catch (err) {
       console.error("Review submit error:", err);
@@ -97,7 +97,7 @@ const SingleMoviePage = () => {
 
     singleMovieDetails(movieId)
       .then((res) => {
-        setMovie(res.data);
+        setMovie(res?.data);
       })
       .catch((err) => {
         console.error("Error fetching movie:", err);
@@ -105,7 +105,7 @@ const SingleMoviePage = () => {
 
     getMovieReviews(movieId)
       .then((res) => {
-        setReviews(res.data);
+        setReviews(res?.data);
         setLoadingReviews(false);
       })
       .catch((err) => {
