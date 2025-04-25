@@ -99,7 +99,7 @@ function SignupPage() {
               <span className="label-text text-sm text-white">Confirm Password</span>
             </label>
             <input
-              type={showPassword ? 'text' : 'password'}
+              type={showConfirmPassword ? 'text' : 'password'}
               name="confirmpassword"
               placeholder="Confirm your password"
               className="input input-bordered w-full bg-white/80 text-black pr-10"
