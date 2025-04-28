@@ -5,6 +5,7 @@ const EditReviewForm = ({ show, onClose, onSubmit, existingReview }) => {
   const [rating, setRating] = useState(existingReview?.rating || 0);
   const [hover, setHover] = useState(null);
   const [review, setReview] = useState(existingReview?.review || "");
+  const [submitting, setSubmitting] = useState(false); 
 
   useEffect(() => {
     if (existingReview) {
@@ -18,8 +19,16 @@ const EditReviewForm = ({ show, onClose, onSubmit, existingReview }) => {
       alert("Please select a rating and write a review.");
       return;
     }
-    await onSubmit({ rating, review });
-    onClose();
+
+    if (submitting) return; 
+    setSubmitting(true);
+
+    try {
+      await onSubmit({ rating, review });
+      onClose();
+    } finally {
+      setSubmitting(false);
+    }
   };
 
   if (!show) return null;
@@ -29,7 +38,6 @@ const EditReviewForm = ({ show, onClose, onSubmit, existingReview }) => {
       <div className="modal-box">
         <h3 className="font-bold text-lg mb-4">Edit Review</h3>
 
-        {/* Rating Section */}
         <div className="flex mb-4">
           {[...Array(5)].map((_, index) => {
             const current = index + 1;
@@ -46,7 +54,6 @@ const EditReviewForm = ({ show, onClose, onSubmit, existingReview }) => {
           })}
         </div>
 
-        {/* Review Textarea */}
         <textarea
           className="textarea textarea-bordered w-full mb-4"
           placeholder="Edit your review..."
@@ -55,7 +62,13 @@ const EditReviewForm = ({ show, onClose, onSubmit, existingReview }) => {
         />
 
         <div className="modal-action">
-          <button className="btn btn-warning" onClick={handleUpdate}>Update</button>
+          <button
+            className="btn btn-warning"
+            onClick={handleUpdate}
+            disabled={submitting}
+          >
+            {submitting ? "Updating..." : "Update"}
+          </button>
           <button className="btn btn-outline" onClick={onClose}>Cancel</button>
         </div>
       </div>

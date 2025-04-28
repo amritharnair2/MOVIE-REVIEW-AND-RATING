@@ -5,6 +5,7 @@ const ReviewForm = ({ show, onClose, onSubmit }) => {
   const [rating, setRating] = useState(0);
   const [hover, setHover] = useState(null);
   const [review, setReview] = useState("");
+  const [submitting, setSubmitting] = useState(false); 
 
   const handleSubmit = async () => {
     if (rating === 0 || !review.trim()) {
@@ -12,10 +13,17 @@ const ReviewForm = ({ show, onClose, onSubmit }) => {
       return;
     }
 
-    await onSubmit({ rating, review });
-    setRating(0);
-    setReview("");
-    onClose();
+    if (submitting) return; 
+    setSubmitting(true);
+
+    try {
+      await onSubmit({ rating, review });
+      setRating(0);
+      setReview("");
+      onClose();
+    } finally {
+      setSubmitting(false);
+    }
   };
 
   if (!show) return null;
@@ -25,7 +33,6 @@ const ReviewForm = ({ show, onClose, onSubmit }) => {
       <div className="modal-box">
         <h3 className="font-bold text-lg mb-4">Add Review</h3>
 
-        {/* Rating Section */}
         <div className="flex mb-4">
           {[...Array(5)].map((_, index) => {
             const current = index + 1;
@@ -42,7 +49,6 @@ const ReviewForm = ({ show, onClose, onSubmit }) => {
           })}
         </div>
 
-        {/* Review Textarea */}
         <textarea
           className="textarea textarea-bordered w-full mb-4"
           placeholder="Write your review..."
@@ -51,7 +57,13 @@ const ReviewForm = ({ show, onClose, onSubmit }) => {
         />
 
         <div className="modal-action">
-          <button className="btn btn-success" onClick={handleSubmit}>Submit</button>
+          <button
+            className="btn btn-success"
+            onClick={handleSubmit}
+            disabled={submitting}
+          >
+            {submitting ? "Submitting..." : "Submit"}
+          </button>
           <button className="btn btn-outline" onClick={onClose}>Cancel</button>
         </div>
       </div>
@@ -60,5 +72,6 @@ const ReviewForm = ({ show, onClose, onSubmit }) => {
 };
 
 export default ReviewForm;
+
 
 
