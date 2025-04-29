@@ -101,15 +101,16 @@ const deleteMovie = async (req, res) => {
         }
         const deletedMovie = await movieDb.findByIdAndDelete(movieId);
         if (!deletedMovie) {
-            return res.status(400).json({ error: "Movie not found" });
+            return res.status(404).json({ error: "Movie not found" });
         }
-        await reviewDb.deleteMany({ movie: new mongoose.Types.ObjectId(movieId) });
+        await reviewDb.deleteMany({ movie: movieId });
         return res.status(200).json({ message: "Movie and associated reviews deleted successfully" });
     } catch (error) {
-        console.log(error);
-        res.status(error.status || 500).json({ error: error.message || "Internal server error" });
+        console.error("Error in deleteMovie:", error);
+        res.status(500).json({ error: error.message || "Internal server error" });
     }
 };
+
 
 
 //Search a movie
