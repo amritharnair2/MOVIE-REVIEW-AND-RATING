@@ -3,6 +3,8 @@ const createToken = require("../utilities/generateToken");
 const { hashPassword, comparePassword } = require("../utilities/passwordUtilities");
 const uploadToCloudinary = require("../utilities/imageUpload");
 const mongoose = require('mongoose');  
+const updateMovieAvgRating = require("../utilities/updateMovieAvgRating");
+const reviewDb = require("../models/reviewModel");
 
 //Register for new user
 const register = async (req, res) => {
@@ -142,17 +144,27 @@ const updateUser = async (req, res) => {
 //delete user
 const deleteUser = async (req, res) => {
     try {
-        const { userId } = req.params
+        const { userId } = req.params;
         if (!mongoose.Types.ObjectId.isValid(userId)) {
-            return res.status(400).json({ error: "Invalid id" })
+            return res.status(400).json({ error: "Invalid user ID" });
         }
-        await userDb.findByIdAndDelete(userId)
-        return res.status(200).json("user deleted")
+    
+        const deletedUser = await userDb.findByIdAndDelete(userId);
+        if (!deletedUser) {
+            return res.status(404).json({ error: "User not found" });
+        }
+    
+        const result = await reviewDb.deleteMany({ user: new mongoose.Types.ObjectId(userId) });
+        console.log(`Deleted ${result.deletedCount} reviews`);
+        return res.status(200).json("User and their reviews deleted");
     } catch (error) {
-        console.log(error);
-        res.status(error.status || 500).json({ error: error.message || "Internal server error" })
+        console.error("Error in deleteUser:", error);
+        res.status(error.status || 500).json({ error: error.message || "Internal server error" });
     }
-}
+};
+
+
+
 
 
 //list users
