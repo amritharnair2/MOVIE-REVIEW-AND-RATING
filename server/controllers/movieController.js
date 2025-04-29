@@ -1,5 +1,6 @@
 const movieDb = require("../models/movieModel");
 const uploadToCloudinary = require("../utilities/imageUpload");
+const reviewDb = require("../models/reviewModel");
 
 //Add a new movie
 const addMovie = async (req, res) => {
@@ -95,16 +96,17 @@ const updateMovie = async (req, res) => {
 const deleteMovie = async (req, res) => {
     try {
         const { movieId } = req.params;
-        const deleteMovie = await movieDb.findByIdAndDelete(movieId)
-        if (!deleteMovie) {
-            return res.status(400).json({ error: "Movie not found" })
+        const deletedMovie = await movieDb.findByIdAndDelete(movieId);
+        if (!deletedMovie) {
+            return res.status(400).json({ error: "Movie not found" });
         }
-        return res.status(200).json({ message: "Movie deleted successfully" })
+        await reviewDb.deleteMany({ movieId });
+        return res.status(200).json({ message: "Movie and associated reviews deleted successfully" });
     } catch (error) {
-        console.log(error)
-        res.status(error.status || 500).json({ error: error.message || "Internal server error" })
+        console.log(error);
+        res.status(error.status || 500).json({ error: error.message || "Internal server error" });
     }
-}
+};
 
 
 //Search a movie
