@@ -99,7 +99,7 @@ const deleteMovie = async (req, res) => {
         if (!mongoose.Types.ObjectId.isValid(movieId)) {
             return res.status(400).json({ error: "Invalid movie ID" });
         }
-        const deletedMovie = await movieDb.findByIdAndDelete({movieId});
+        const deletedMovie = await movieDb.findByIdAndDelete(movieId);
         if (!deletedMovie) {
             return res.status(400).json({ error: "Movie not found" });
         }
