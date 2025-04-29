@@ -96,11 +96,14 @@ const updateMovie = async (req, res) => {
 const deleteMovie = async (req, res) => {
     try {
         const { movieId } = req.params;
-        const deletedMovie = await movieDb.findByIdAndDelete(movieId);
+        if (!mongoose.Types.ObjectId.isValid(movieId)) {
+            return res.status(400).json({ error: "Invalid movie ID" });
+        }
+        const deletedMovie = await movieDb.findByIdAndDelete({movieId});
         if (!deletedMovie) {
             return res.status(400).json({ error: "Movie not found" });
         }
-        await reviewDb.deleteMany({ movieId });
+        await reviewDb.deleteMany({ movie: new mongoose.Types.ObjectId(movieId) });
         return res.status(200).json({ message: "Movie and associated reviews deleted successfully" });
     } catch (error) {
         console.log(error);
