@@ -1,6 +1,7 @@
 const movieDb = require("../models/movieModel");
 const uploadToCloudinary = require("../utilities/imageUpload");
 const reviewDb = require("../models/reviewModel");
+const mongoose = require('mongoose'); 
 
 //Add a new movie
 const addMovie = async (req, res) => {
