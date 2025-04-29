@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { addMovie } from "../../services/AdminServices"
+import { addMovie } from "../../services/AdminServices";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 
@@ -19,6 +19,7 @@ function AddMovie() {
 
   const [image, setImage] = useState(null);
   const [message, setMessage] = useState("");
+  const [loading, setLoading] = useState(false); // To prevent double submit
 
   const handleChange = (e) => {
     setMovieData({ ...movieData, [e.target.name]: e.target.value });
@@ -36,6 +37,8 @@ function AddMovie() {
       return;
     }
 
+    setLoading(true); // Disable the button after submission
+
     const formData = new FormData();
     for (let key in movieData) {
       formData.append(key, movieData[key]);
@@ -45,10 +48,12 @@ function AddMovie() {
     try {
       const res = await addMovie(formData);
       setMessage(res.message);
-      toast.success("Movie added successfully")
+      toast.success("Movie added successfully");
       setTimeout(() => navigate("/admin"), 2000);
     } catch (err) {
       setMessage(err?.error || "Something went wrong");
+    } finally {
+      setLoading(false); // Re-enable the button
     }
   };
 
@@ -154,8 +159,12 @@ function AddMovie() {
             />
           </div>
 
-          <button type="submit" className="btn btn-primary w-full">
-            Add Movie
+          <button
+            type="submit"
+            className="btn btn-primary w-full"
+            disabled={loading}
+          >
+            {loading ? "Adding..." : "Add Movie"}
           </button>
         </fieldset>
       </form>
@@ -164,4 +173,5 @@ function AddMovie() {
 }
 
 export default AddMovie;
+
 
