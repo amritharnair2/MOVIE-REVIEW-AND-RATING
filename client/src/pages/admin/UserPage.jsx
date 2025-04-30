@@ -53,10 +53,10 @@ const AdminUsersPage = () => {
   };
 
   return (
-    <div className="text-white font-serif">
-      <div className=" text-black space-y-8">
+    <div className="font-serif">
+      <div className="space-y-8">
         <section>
-          <h2 className="text-2xl font-bold text-black">Users</h2>
+          <h2 className="text-2xl font-bold">Users</h2>
           {loading ? (
             <div className="text-center py-4">
               <div className="inline-block w-6 h-6 border-4 border-t-transparent border-primary border-solid rounded-full animate-spin"></div>

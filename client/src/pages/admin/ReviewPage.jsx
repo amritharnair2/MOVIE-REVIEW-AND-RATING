@@ -35,10 +35,9 @@ const AdminReviewsPage = () => {
   };
 
   return (
-    <div className='text-black'>
+    <div>
       <section>
-        <h2 className="text-2xl font-bold text-black">Reviews</h2>
-
+        <h2 className="text-2xl font-bold">Reviews</h2>
         {loading ? (
           <div className="text-center py-4">
             <div className="inline-block w-6 h-6 border-4 border-t-transparent border-primary border-solid rounded-full animate-spin"></div>

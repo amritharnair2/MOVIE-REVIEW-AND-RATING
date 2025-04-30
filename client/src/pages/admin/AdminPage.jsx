@@ -53,10 +53,10 @@ const AdminPage = () => {
   };
 
   return (
-    <div className="text-white font-serif">
-      <div className="text-white">
+    <div className="font-serif">
+      <div>
         <div className="flex justify-between items-center mb-4">
-          <h2 className="text-2xl font-bold text-black">Movies</h2>
+          <h2 className="text-2xl font-bold">Movies</h2>
           <button
             onClick={handleAddMovie}
             className="px-4 py-2 bg-accent text-black border border-black hover:bg-gray-200"
