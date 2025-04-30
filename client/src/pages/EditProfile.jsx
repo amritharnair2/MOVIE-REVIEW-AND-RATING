@@ -23,6 +23,7 @@ function EditProfilePage() {
   const [showOld, setShowOld] = useState(false);
   const [showNew, setShowNew] = useState(false);
   const [showConfirm, setShowConfirm] = useState(false);
+  const [loading, setLoading] = useState(false); // To prevent multiple submissions
 
   const handleChange = e => {
     const { name, value, files } = e.target;
@@ -34,6 +35,9 @@ function EditProfilePage() {
   };
 
   const handleSubmit = async () => {
+    if (loading) return; // Block further clicks
+    setLoading(true);
+
     const formData = new FormData();
     formData.append('name', values.name);
     formData.append('email', values.email);
@@ -45,13 +49,14 @@ function EditProfilePage() {
     try {
       const res = await userUpdate(formData);
       const updatedUser = res.data.updatedUser;
-      console.log(updatedUser)
       toast.success('Profile updated successfully!');
       localStorage.setItem('user', JSON.stringify(updatedUser));
       dispatch(saveUser(updatedUser));
       navigate('/profile');
     } catch (err) {
       toast.error(err?.response?.data?.error || 'Update failed');
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -59,7 +64,7 @@ function EditProfilePage() {
     <div className="flex items-center justify-center">
       <div>
         <h1 className="text-3xl font-bold text-center mb-4">Edit Profile</h1>
-        <fieldset className="space-y-4">
+        <fieldset className="space-y-4" disabled={loading}>
           <div>
             <label className="block text-sm">Name:</label>
             <input type="text" name="name" value={values.name} className="input input-bordered w-full bg-white/80 text-black"
@@ -100,8 +105,13 @@ function EditProfilePage() {
               accept="image/*" onChange={handleChange} />
           </div>
           <div className="mt-4">
-            <button className="btn bg-red-600 text-white w-full hover:bg-red-700" onClick={handleSubmit}>
-              Save Changes
+            <button
+              type="button"
+              className="btn bg-red-600 text-white w-full hover:bg-red-700"
+              onClick={handleSubmit}
+              disabled={loading}
+            >
+              {loading ? 'Saving...' : 'Save Changes'}
             </button>
           </div>
         </fieldset>
@@ -111,4 +121,5 @@ function EditProfilePage() {
 }
 
 export default EditProfilePage;
+
 

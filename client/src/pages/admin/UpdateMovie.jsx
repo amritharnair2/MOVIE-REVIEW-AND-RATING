@@ -21,6 +21,7 @@ function UpdateMoviePage() {
 
   const [image, setImage] = useState(null);
   const [message, setMessage] = useState("");
+  const [loading, setLoading] = useState(false); // New loading state
 
   useEffect(() => {
     const fetchMovie = async () => {
@@ -54,6 +55,7 @@ function UpdateMoviePage() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setLoading(true); // Start loading
     const formData = new FormData();
     for (let key in movieData) {
       formData.append(key, movieData[key]);
@@ -65,12 +67,13 @@ function UpdateMoviePage() {
       const res = await updateMovie(movieId, formData);
       console.log(res)
       toast.success("Movie updated successfully!");
-      navigate("/admin")
+      navigate("/admin");
     } catch (err) {
       console.error("Update error:", err);
-      console.error("Response data:", err.response?.data);
       setMessage(err.response?.data?.error || err.message || "Update failed");
       toast.error("Update failed! See console for details.");
+    } finally {
+      setLoading(false); // Stop loading
     }
   };
 
@@ -81,7 +84,7 @@ function UpdateMoviePage() {
         <div className="mb-4 text-center text-sm text-red-500">{message}</div>
       )}
       <form onSubmit={handleSubmit}>
-        <fieldset className="space-y-4">
+        <fieldset className="space-y-4" disabled={loading}>
           {[{ name: "name", label: "Movie Name", type: "text" },
           { name: "director", label: "Director", type: "text" },
           { name: "hero", label: "Hero", type: "text" },
@@ -114,6 +117,7 @@ function UpdateMoviePage() {
               <option>Telugu</option>
             </select>
           </div>
+
           <div className="mb-4">
             <label className="block text-sm mb-2">Genre:</label>
             <select
@@ -131,6 +135,7 @@ function UpdateMoviePage() {
               <option>Crime</option>
             </select>
           </div>
+
           <div className="mb-4">
             <label className="block text-sm mb-2">Release Date:</label>
             <input
@@ -141,6 +146,7 @@ function UpdateMoviePage() {
               onChange={handleChange}
             />
           </div>
+
           <div className="mb-4">
             <label className="block text-sm mb-2">Plot Summary:</label>
             <textarea
@@ -152,6 +158,7 @@ function UpdateMoviePage() {
               onChange={handleChange}
             ></textarea>
           </div>
+
           <div className="mb-4">
             <label className="block text-sm mb-2">Movie Poster:</label>
             <input
@@ -162,8 +169,13 @@ function UpdateMoviePage() {
               onChange={handleImageChange}
             />
           </div>
-          <button type="submit" className="btn btn-primary w-full">
-            Update Movie
+
+          <button
+            type="submit"
+            className="btn btn-primary w-full"
+            disabled={loading}
+          >
+            {loading ? "Updating..." : "Update Movie"}
           </button>
         </fieldset>
       </form>
@@ -172,3 +184,4 @@ function UpdateMoviePage() {
 }
 
 export default UpdateMoviePage;
+
