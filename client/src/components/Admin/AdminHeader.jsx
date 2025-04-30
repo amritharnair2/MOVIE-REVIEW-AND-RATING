@@ -23,7 +23,6 @@ function Header() {
   return (
     <div>
   <div className="relative navbar bg-base-100 text-base-content w-full shadow-sm h-20">
-    {/* Logo Left */}
     <div className="absolute left-4 top-1/2 -translate-y-1/2">
       <a className="btn btn-ghost text-xl">
         <h1 className="text-3xl font-bold">
@@ -31,8 +30,6 @@ function Header() {
         </h1>
       </a>
     </div>
-
-    {/* Center Nav */}
     <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2">
       <nav className="flex gap-8 text-md font-semibold">
         <Link to="/admin" className="text-gray-400 hover:underline">Movies</Link>
@@ -40,8 +37,6 @@ function Header() {
         <Link to="/admin/review" className="text-gray-400 hover:underline">Reviews</Link>
       </nav>
     </div>
-
-    {/* Admin Right */}
     <div className="absolute right-4 top-1/2 -translate-y-1/2 flex gap-3 items-center">
       <span className='text-md me-5'>Welcome Admin</span>
       <span>
