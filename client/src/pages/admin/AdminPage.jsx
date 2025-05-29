@@ -15,7 +15,7 @@ const AdminPage = () => {
     const fetchMovies = async () => {
       try {
         const res = await listMovies();
-        setMovies(res.data);
+        setMovies(res.data.reverse());
       } catch (err) {
         console.log(err);
       }

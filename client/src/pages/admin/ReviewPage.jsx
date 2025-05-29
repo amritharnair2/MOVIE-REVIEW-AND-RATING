@@ -16,7 +16,7 @@ const AdminReviewsPage = () => {
       } catch (err) {
         console.log(err);
       } finally {
-        setLoading(false); // ⬅️ Stop loading after data is fetched
+        setLoading(false); // Stop loading after data is fetched
       }
     };
     fetchReviews();

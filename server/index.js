@@ -30,9 +30,9 @@ app.use(cors({
 
 dbConnection()
 
-app.get("/", (req, res) => [
+app.get("/", (req, res) => {
   res.json("Server started")
-])
+})
 
 app.use("/user", userRouter)
 app.use("/movie", movieRouter)

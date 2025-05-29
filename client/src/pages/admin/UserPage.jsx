@@ -45,7 +45,7 @@ const AdminUsersPage = () => {
 
       await deleteUser(userId);
       setUsers(users.filter((user) => user._id !== userId));
-      toast.success('User deleted successfully');
+      toast.success('User blocked successfully');
     } catch (error) {
       console.error('Error deleting user:', error);
       toast.error('Failed to delete user');
@@ -84,7 +84,7 @@ const AdminUsersPage = () => {
                         onClick={() => handleDelete(user._id)}
                         className="bg-red-500 text-white px-4 py-2 rounded"
                       >
-                        Delete
+                        Block User
                       </button>
                     </td>
                   </tr>
