@@ -8,7 +8,7 @@ A full-stack web application where users can explore movies, write reviews, and 
 - 👥 **Role-based Access Control** (Users & Admins)
 - 📝 **Write and Edit Reviews**
 - ⭐ **Rate Movies**
-- 🔍 **Search & Filter by Genre**
+- 🔍 **Search & Filter by Language Genre**
 - 🌓 **Dark and Light Mode**
 - 🧑‍💼 **Admin Dashboard** to manage users, reviews & movies
 - 🖼️ **Upload Profile Pictures**
@@ -27,7 +27,7 @@ A full-stack web application where users can explore movies, write reviews, and 
 - **Node.js + Express.js**
 - **MongoDB** with Mongoose
 - **JWT** for secure authentication
-- **Multer** for image uploads
+- **Multer** + **Cloudinary** for image uploads
 
 ## 🚀 Getting Started
 
@@ -39,7 +39,6 @@ A full-stack web application where users can explore movies, write reviews, and 
 
 ### Installation
 
-```bash
 # Clone the repository
 git clone https://github.com/yourusername/movie-review-app.git
 cd movie-review-app
@@ -52,14 +51,19 @@ npm install
 cd server
 npm install
 
-Environment Variables
+## Environment Variables
 
-Create a .env file in the server directory and add:
+# Create a .env file in the server directory and add:
 PORT=5000
 MONGO_URI=your_mongodb_connection_string
 JWT_SECRET=your_secret_key
 
-Run the Application
+# Cloudinary Credentials
+CLOUDINARY_CLOUD_NAME=your_cloud_name
+CLOUDINARY_API_KEY=your_api_key
+CLOUDINARY_API_SECRET=your_api_secret
+
+# Run the Application
 cd server
 npm run dev
 
