@@ -40,7 +40,7 @@ A full-stack web application where users can explore movies, write reviews, and 
 ### Installation
 
 # Clone the repository
-git clone https://github.com/yourusername/movie-review-app.git
+git clone [https://github.com/yourusername/movie-review-app.git](https://github.com/amritharnair2/MOVIE-REVIEW-AND-RATING.git)
 cd movie-review-app
 
 # Install frontend dependencies
@@ -51,23 +51,23 @@ npm install
 cd server
 npm install
 
-## Environment Variables
+### Environment Variables
 
-### Create a .env file in the server directory and add:
+##### Create a .env file in the server directory and add:
 PORT=5000
 MONGO_URI=your_mongodb_connection_string
 JWT_SECRET=your_secret_key
 
-### Cloudinary Credentials
+##### Cloudinary Credentials
 CLOUDINARY_CLOUD_NAME=your_cloud_name
 CLOUDINARY_API_KEY=your_api_key
 CLOUDINARY_API_SECRET=your_api_secret
 
-# Run the Application
+### Run the Application
 cd server
 npm run dev
 
-# Start frontend app
+### Start frontend app
 cd client
 
 🧑‍💻 Author
