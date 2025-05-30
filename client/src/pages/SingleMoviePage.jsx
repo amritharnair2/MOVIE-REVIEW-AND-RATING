@@ -121,7 +121,8 @@ const SingleMoviePage = () => {
             <p>{movie?.genre}</p>
 
             <p className="font-semibold">Rating:</p>
-            <p>{movie?.rating}</p>
+            <p>{movie?.rating ? movie.rating : "No rating"}</p>
+
 
             <p className="font-semibold">Release Date:</p>
             <p>
