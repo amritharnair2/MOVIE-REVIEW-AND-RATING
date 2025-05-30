@@ -19,7 +19,7 @@ function ProfilePage() {
         setLoading(true);
         const response = await getUserReviews(user._id);
         console.log('Fetched Reviews:', response.data.reviews);
-        setUserReviews(response?.data?.reviews || []);
+        setUserReviews(response?.data?.reviews.reverse() || []);
         setLoading(false);
       } catch (error) {
         console.error('Error fetching reviews:', error);
