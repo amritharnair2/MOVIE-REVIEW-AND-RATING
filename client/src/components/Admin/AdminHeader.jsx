@@ -4,6 +4,7 @@ import { useDispatch } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 import { clearUser } from '../../redux/features/userSlice';
 import { toast } from "react-toastify";
+import ThemeToggle from '../../pages/ThemeToggle';
 
 function Header() {
   const navigate = useNavigate()
@@ -52,6 +53,7 @@ function Header() {
         </div>
         <div className="navbar-end gap-3">
           <span className="hidden sm:inline text-md">Welcome Admin</span>
+          <ThemeToggle />
           <button onClick={handleLogout} className="btn btn-ghost btn-circle" title="Logout">
             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
               viewBox="0 0 24 24" fill="none" stroke="currentColor"
