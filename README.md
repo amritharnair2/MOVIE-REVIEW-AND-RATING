@@ -53,12 +53,12 @@ npm install
 
 ## Environment Variables
 
-# Create a .env file in the server directory and add:
+### Create a .env file in the server directory and add:
 PORT=5000
 MONGO_URI=your_mongodb_connection_string
 JWT_SECRET=your_secret_key
 
-# Cloudinary Credentials
+### Cloudinary Credentials
 CLOUDINARY_CLOUD_NAME=your_cloud_name
 CLOUDINARY_API_KEY=your_api_key
 CLOUDINARY_API_SECRET=your_api_secret
@@ -69,5 +69,8 @@ npm run dev
 
 # Start frontend app
 cd client
-npm run dev
+
+🧑‍💻 Author
+Amritha R
+🚀 Passionate Full Stack Developer
 
