@@ -19,8 +19,10 @@ function HomePage() {
       setLoading(true);
       try {
         const res = await listMovies();
-        setMovies(res.data.reverse());
-        setAllMovies(res.data.reverse());
+        const reversedData = res.data.slice().reverse();
+        setMovies(reversedData);
+        setAllMovies(reversedData);
+
       } catch (err) {
         console.log(err);
       } finally {
