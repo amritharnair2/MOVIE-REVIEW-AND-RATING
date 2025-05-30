@@ -97,7 +97,7 @@ cd server
 npm run dev
 
 # Start frontend app
-cd ../client
+cd client
 npm run dev
 ```
 
@@ -109,7 +109,7 @@ npm run dev
 🚀 Passionate Full Stack Developer  
 
 📫 Connect with me:  
-[LinkedIn](https://www.linkedin.com/](https://www.linkedin.com/in/amritha-r-a06a00226?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app) | [Email](mailto:amritharnair2@gmail.com)
+[LinkedIn](https://www.linkedin.com/in/amritha-r-a06a00226?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app) | [Email](mailto:amritharnair2@gmail.com)
 
 ---
 
